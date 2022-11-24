@@ -57,6 +57,8 @@ namespace BasicFacebookFeatures
             // 
             // textBoxSearchByName
             // 
+            this.textBoxSearchByName.AccessibleDescription = "";
+            this.textBoxSearchByName.AccessibleName = "";
             this.textBoxSearchByName.Location = new System.Drawing.Point(12, 12);
             this.textBoxSearchByName.Name = "textBoxSearchByName";
             this.textBoxSearchByName.Size = new System.Drawing.Size(305, 26);

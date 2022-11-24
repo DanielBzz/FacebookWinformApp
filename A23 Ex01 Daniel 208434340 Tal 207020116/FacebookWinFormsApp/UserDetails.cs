@@ -8,9 +8,9 @@ using System.Xml.Serialization;
 
 namespace BasicFacebookFeatures
 {
-    internal class UserDetails
+    public class UserDetails
     {
-        private readonly string m_Token;
+        public string m_Token;
 
         private UserDetails()
         {
@@ -45,7 +45,10 @@ namespace BasicFacebookFeatures
 
             try
             {
-                stream = new FileStream(@"C:/Temp/userDetails.xml", FileMode.Open);
+                string fileName = "userDetails.xml";
+                string filePath = Path.Combine(Environment.CurrentDirectory, fileName);
+
+                stream = new FileStream(filePath, FileMode.Open);
                 XmlSerializer serializer = new XmlSerializer(typeof(UserDetails));
                 lastUser = serializer.Deserialize(stream) as UserDetails;
             }
@@ -63,7 +66,8 @@ namespace BasicFacebookFeatures
 
         public void SaveToFile()
         {
-            string filePath = @"C:/Temp/userDetails.xml";
+            string fileName = "userDetails.xml";
+            string filePath = Path.Combine(Environment.CurrentDirectory, fileName);
             FileMode mode = File.Exists(filePath) ?
                 FileMode.Truncate : FileMode.Create;
 

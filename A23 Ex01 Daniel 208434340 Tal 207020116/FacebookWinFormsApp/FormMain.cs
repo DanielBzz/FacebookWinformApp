@@ -21,6 +21,7 @@ namespace BasicFacebookFeatures
         {
             InitializeComponent();
             FacebookWrapper.FacebookService.s_CollectionLimit = 100;
+            isRememberLastUser();
         }
 
         private void buttonLogin_Click(object sender, EventArgs e)
