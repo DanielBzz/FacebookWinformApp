@@ -15,6 +15,7 @@ namespace BasicFacebookFeatures
 {
     public partial class FormFacebookCollection<T> : Form
     {
+
         private readonly FacebookObjectCollection<T> m_Collection;
         private List<T> m_InList;
 
@@ -33,7 +34,8 @@ namespace BasicFacebookFeatures
 
             foreach (T item in m_Collection)
             {
-                listBoxCollectionItemsNames.Items.Add(nameProperty.GetValue(item));
+                string name = nameProperty.GetValue(item) != null ? (string)nameProperty.GetValue(item) : $"No name for {typeof(T)}";
+                listBoxCollectionItemsNames.Items.Add(name);
                 m_InList.Add(item);
             }
 
@@ -42,6 +44,9 @@ namespace BasicFacebookFeatures
                 listBoxCollectionItemsNames.Items.Add($"No {typeof(T).Name}s to show");
                 textBoxSearchByName.Enabled = false;
             }
+
+            buttonShowPictures.Enabled = typeof(T).GetProperty("PictureAlbumURL") != null;
+            buttonShowPictures.Visible = typeof(T).GetProperty("PictureAlbumURL") != null;
         }
 
         private void listBoxCollectionItemsNames_SelectedIndexChanged(object sender, EventArgs e)
@@ -92,5 +97,25 @@ namespace BasicFacebookFeatures
                 labelDescription.Text = string.Empty;
             }
         }
+
+        private void listBoxCollectionItemsNames_Click(object sender, EventArgs e)
+        {
+            Album selectedAlbum = m_InList[listBoxCollectionItemsNames.SelectedIndex] as Album;
+
+            if (selectedAlbum != null)
+            {
+                pictureBoxItemMainPhoto.LoadAsync(selectedAlbum.PictureAlbumURL);
+
+            }
+        }
+
+        private void buttonShowPictures_Click(object sender, EventArgs e)
+        {
+            if(listBoxCollectionItemsNames.SelectedIndex != null)
+            {
+                new FormFacebookCollection<Photo>((m_InList[listBoxCollectionItemsNames.SelectedIndex] as Album).Photos).ShowDialog();
+            }
+        }
+
     }
 }
