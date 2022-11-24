@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 using FacebookWrapper.ObjectModel;
 using FacebookWrapper;
@@ -25,8 +26,6 @@ namespace BasicFacebookFeatures
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText("design.patterns20cc"); /// the current password for Desig Patter
-
             m_LoginResult = FacebookService.Login(
                     /// (This is Desig Patter's App ID. replace it with your own)
                     "878533360263979",
@@ -61,7 +60,12 @@ namespace BasicFacebookFeatures
         {
             Text = $"{m_LoggedInUser.Name}'s Profile";
             checkBoxRememberMe.Enabled = true;
+            //Thread fetchThred = new Thread(fetchUserInfo);
+            //fetchThred.Start();
             fetchUserInfo();
+            timer1.Enabled = true;
+
+
         }
 
         private void fetchUserInfo()
@@ -75,6 +79,7 @@ namespace BasicFacebookFeatures
             fetchPages();
             fetchEvents();
             fetchCheckIns();
+            fetchAlbums();
         }
 
         private void fetchCoverPhoto()
@@ -148,6 +153,21 @@ namespace BasicFacebookFeatures
                 if (evnt.Name != null)
                 {
                     listBoxEvents.Items.Add(evnt.Name + ": " + evnt.Description);
+                }
+            }
+        }
+        private void fetchAlbums()
+        {
+            if (m_LoggedInUser.Albums.Count == 0)
+            {
+                listBoxAlbums.Items.Add("You don't have albums");
+            }
+
+            foreach (Album album in m_LoggedInUser.Albums)
+            {
+                if (album.Name != null)
+                {
+                    listBoxAlbums.Items.Add(album.Name + ": " + album.Description);
                 }
             }
         }
@@ -257,6 +277,62 @@ namespace BasicFacebookFeatures
         private void buttonShowAllEvents_Click(object sender, EventArgs e)
         {
             new FormFacebookCollection<Event>(m_LoggedInUser.Events).ShowDialog();
+        }
+
+
+        private void labelCurrentPostLikes_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonShowAllAlbums_Click(object sender, EventArgs e)
+        {
+            new FormFacebookCollection<Album>(m_LoggedInUser.Albums).ShowDialog();
+
+        }
+
+        private void listBoxAlbums_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Album selectedAlbum = m_LoggedInUser.Albums[listBoxAlbums.SelectedIndex];
+
+            if (selectedAlbum != null)
+            {
+                pictureBoxAlbums.LoadAsync(selectedAlbum.PictureAlbumURL);
+            }
+        }
+    
+        private void changeRandomPictureInPictureBox()
+        {
+            var rand = new Random();
+            Album selectedRandomAlbum;
+            Photo selectedRandomPhoto;
+            selectedRandomAlbum = m_LoggedInUser.Albums[rand.Next(0, m_LoggedInUser.Albums.Count)];
+            if(selectedRandomAlbum != null)
+            {
+                if (selectedRandomAlbum.Photos.Count > 0)
+                {
+                    selectedRandomPhoto = selectedRandomAlbum.Photos[rand.Next(0, selectedRandomAlbum.Photos.Count)];
+                    if (selectedRandomPhoto != null)
+                    {
+                        pictureBoxChange.LoadAsync(selectedRandomPhoto.PictureNormalURL);
+                    }
+                }
+            }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            changeRandomPictureInPictureBox();
+        }
+
+        private void listBoxPages_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

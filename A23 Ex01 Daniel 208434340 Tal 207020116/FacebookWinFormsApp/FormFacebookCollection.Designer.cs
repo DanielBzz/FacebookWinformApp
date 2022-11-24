@@ -42,25 +42,27 @@ namespace BasicFacebookFeatures
             this.pictureBoxItemMainPhoto = new System.Windows.Forms.PictureBox();
             this.labelDescription = new System.Windows.Forms.Label();
             this.labelDescriptionValue = new System.Windows.Forms.Label();
+            this.buttonShowPictures = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxItemMainPhoto)).BeginInit();
             this.SuspendLayout();
             // 
             // listBoxCollectionItemsNames
             // 
             this.listBoxCollectionItemsNames.FormattingEnabled = true;
-            this.listBoxCollectionItemsNames.ItemHeight = 20;
             this.listBoxCollectionItemsNames.Location = new System.Drawing.Point(12, 55);
             this.listBoxCollectionItemsNames.Name = "listBoxCollectionItemsNames";
-            this.listBoxCollectionItemsNames.Size = new System.Drawing.Size(305, 324);
+            this.listBoxCollectionItemsNames.Size = new System.Drawing.Size(305, 316);
             this.listBoxCollectionItemsNames.TabIndex = 0;
+            this.listBoxCollectionItemsNames.Click += new System.EventHandler(this.listBoxCollectionItemsNames_Click);
             this.listBoxCollectionItemsNames.SelectedIndexChanged += new System.EventHandler(this.listBoxCollectionItemsNames_SelectedIndexChanged);
             // 
             // textBoxSearchByName
             // 
             this.textBoxSearchByName.Location = new System.Drawing.Point(12, 12);
             this.textBoxSearchByName.Name = "textBoxSearchByName";
-            this.textBoxSearchByName.Size = new System.Drawing.Size(305, 26);
+            this.textBoxSearchByName.Size = new System.Drawing.Size(305, 20);
             this.textBoxSearchByName.TabIndex = 1;
+            this.textBoxSearchByName.Text = "Search";
             this.textBoxSearchByName.TextChanged += new System.EventHandler(this.textBoxSearchByName_TextChanged);
             // 
             // pictureBoxItemMainPhoto
@@ -68,6 +70,7 @@ namespace BasicFacebookFeatures
             this.pictureBoxItemMainPhoto.Location = new System.Drawing.Point(323, 55);
             this.pictureBoxItemMainPhoto.Name = "pictureBoxItemMainPhoto";
             this.pictureBoxItemMainPhoto.Size = new System.Drawing.Size(124, 134);
+            this.pictureBoxItemMainPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxItemMainPhoto.TabIndex = 2;
             this.pictureBoxItemMainPhoto.TabStop = false;
             // 
@@ -76,7 +79,7 @@ namespace BasicFacebookFeatures
             this.labelDescription.AutoSize = true;
             this.labelDescription.Location = new System.Drawing.Point(324, 221);
             this.labelDescription.Name = "labelDescription";
-            this.labelDescription.Size = new System.Drawing.Size(100, 20);
+            this.labelDescription.Size = new System.Drawing.Size(63, 13);
             this.labelDescription.TabIndex = 3;
             this.labelDescription.Text = "Description:";
             // 
@@ -85,12 +88,23 @@ namespace BasicFacebookFeatures
             this.labelDescriptionValue.AutoSize = true;
             this.labelDescriptionValue.Location = new System.Drawing.Point(328, 254);
             this.labelDescriptionValue.Name = "labelDescriptionValue";
-            this.labelDescriptionValue.Size = new System.Drawing.Size(0, 20);
+            this.labelDescriptionValue.Size = new System.Drawing.Size(0, 13);
             this.labelDescriptionValue.TabIndex = 4;
+            // 
+            // buttonShowPictures
+            // 
+            this.buttonShowPictures.Location = new System.Drawing.Point(327, 12);
+            this.buttonShowPictures.Name = "buttonShowPictures";
+            this.buttonShowPictures.Size = new System.Drawing.Size(115, 37);
+            this.buttonShowPictures.TabIndex = 5;
+            this.buttonShowPictures.Text = "Show all pictures in album";
+            this.buttonShowPictures.UseVisualStyleBackColor = true;
+            this.buttonShowPictures.Click += new System.EventHandler(this.buttonShowPictures_Click);
             // 
             // FormFacebookCollection
             // 
             this.ClientSize = new System.Drawing.Size(463, 389);
+            this.Controls.Add(this.buttonShowPictures);
             this.Controls.Add(this.labelDescriptionValue);
             this.Controls.Add(this.labelDescription);
             this.Controls.Add(this.pictureBoxItemMainPhoto);
@@ -107,5 +121,6 @@ namespace BasicFacebookFeatures
 
         private Label labelDescription;
         private Label labelDescriptionValue;
+        private Button buttonShowPictures;
     }
 }

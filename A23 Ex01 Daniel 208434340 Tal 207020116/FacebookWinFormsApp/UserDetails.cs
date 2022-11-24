@@ -45,7 +45,7 @@ namespace BasicFacebookFeatures
 
             try
             {
-                stream = new FileStream(@"C:/Temp/userDetails.xml", FileMode.Open);
+                stream = new FileStream(@"C:/Users/userDetails.xml", FileMode.Open);
                 XmlSerializer serializer = new XmlSerializer(typeof(UserDetails));
                 lastUser = serializer.Deserialize(stream) as UserDetails;
             }
@@ -63,7 +63,7 @@ namespace BasicFacebookFeatures
 
         public void SaveToFile()
         {
-            string filePath = @"C:/Temp/userDetails.xml";
+            string filePath = @"C:/Users/userDetails.xml";
             FileMode mode = File.Exists(filePath) ?
                 FileMode.Truncate : FileMode.Create;
 
