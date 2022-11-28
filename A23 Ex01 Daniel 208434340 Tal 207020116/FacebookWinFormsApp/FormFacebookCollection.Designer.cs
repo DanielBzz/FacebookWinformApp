@@ -49,9 +49,10 @@ namespace BasicFacebookFeatures
             // listBoxCollectionItemsNames
             // 
             this.listBoxCollectionItemsNames.FormattingEnabled = true;
+            this.listBoxCollectionItemsNames.ItemHeight = 16;
             this.listBoxCollectionItemsNames.Location = new System.Drawing.Point(12, 55);
             this.listBoxCollectionItemsNames.Name = "listBoxCollectionItemsNames";
-            this.listBoxCollectionItemsNames.Size = new System.Drawing.Size(305, 316);
+            this.listBoxCollectionItemsNames.Size = new System.Drawing.Size(305, 308);
             this.listBoxCollectionItemsNames.TabIndex = 0;
             this.listBoxCollectionItemsNames.Click += new System.EventHandler(this.listBoxCollectionItemsNames_Click);
             this.listBoxCollectionItemsNames.SelectedIndexChanged += new System.EventHandler(this.listBoxCollectionItemsNames_SelectedIndexChanged);
@@ -62,10 +63,12 @@ namespace BasicFacebookFeatures
             this.textBoxSearchByName.AccessibleName = "";
             this.textBoxSearchByName.Location = new System.Drawing.Point(12, 12);
             this.textBoxSearchByName.Name = "textBoxSearchByName";
-            this.textBoxSearchByName.Size = new System.Drawing.Size(305, 20);
+            this.textBoxSearchByName.Size = new System.Drawing.Size(305, 22);
             this.textBoxSearchByName.TabIndex = 1;
-            this.textBoxSearchByName.Text = "Search";
+            this.textBoxSearchByName.Text = "search";
             this.textBoxSearchByName.TextChanged += new System.EventHandler(this.textBoxSearchByName_TextChanged);
+            this.textBoxSearchByName.Enter += new System.EventHandler(this.textBoxSearchByName_Enter);
+            this.textBoxSearchByName.Leave += new System.EventHandler(this.textBoxSearchByName_Leave);
             // 
             // pictureBoxItemMainPhoto
             // 
@@ -75,13 +78,14 @@ namespace BasicFacebookFeatures
             this.pictureBoxItemMainPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxItemMainPhoto.TabIndex = 2;
             this.pictureBoxItemMainPhoto.TabStop = false;
+            this.pictureBoxItemMainPhoto.Click += new System.EventHandler(this.pictureBoxItemMainPhoto_Click);
             // 
             // labelDescription
             // 
             this.labelDescription.AutoSize = true;
             this.labelDescription.Location = new System.Drawing.Point(324, 221);
             this.labelDescription.Name = "labelDescription";
-            this.labelDescription.Size = new System.Drawing.Size(63, 13);
+            this.labelDescription.Size = new System.Drawing.Size(83, 17);
             this.labelDescription.TabIndex = 3;
             this.labelDescription.Text = "Description:";
             // 
@@ -90,7 +94,7 @@ namespace BasicFacebookFeatures
             this.labelDescriptionValue.AutoSize = true;
             this.labelDescriptionValue.Location = new System.Drawing.Point(328, 254);
             this.labelDescriptionValue.Name = "labelDescriptionValue";
-            this.labelDescriptionValue.Size = new System.Drawing.Size(0, 13);
+            this.labelDescriptionValue.Size = new System.Drawing.Size(0, 17);
             this.labelDescriptionValue.TabIndex = 4;
             // 
             // buttonShowPictures
@@ -105,6 +109,8 @@ namespace BasicFacebookFeatures
             // 
             // FormFacebookCollection
             // 
+            this.AutoScroll = true;
+            this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(463, 389);
             this.Controls.Add(this.buttonShowPictures);
             this.Controls.Add(this.labelDescriptionValue);

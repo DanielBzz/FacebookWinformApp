@@ -34,7 +34,8 @@ namespace BasicFacebookFeatures
 
             foreach (T item in m_Collection)
             {
-                string name = nameProperty.GetValue(item) != null ? (string)nameProperty.GetValue(item) : $"No name for {typeof(T)}";
+                string name = nameProperty.GetValue(item) is string ?
+                    nameProperty.GetValue(item) as string : $"No name for {typeof(T).Name}";
                 listBoxCollectionItemsNames.Items.Add(name);
                 m_InList.Add(item);
             }
@@ -45,32 +46,13 @@ namespace BasicFacebookFeatures
                 textBoxSearchByName.Enabled = false;
             }
 
-            buttonShowPictures.Enabled = typeof(T).GetProperty("PictureAlbumURL") != null;
-            buttonShowPictures.Visible = typeof(T).GetProperty("PictureAlbumURL") != null;
+            buttonShowPictures.Visible = typeof(T) == typeof(Album);
         }
 
         private void listBoxCollectionItemsNames_SelectedIndexChanged(object sender, EventArgs e)
         {
             initalMainPictureValue(listBoxCollectionItemsNames.SelectedIndex);
             initialDescriptionValue(listBoxCollectionItemsNames.SelectedIndex);
-        }
-
-        private void textBoxSearchByName_TextChanged(object sender, EventArgs e)
-        {
-            PropertyInfo nameProperty = typeof(T).GetProperty("Name");
-            string currentName = null;
-
-            listBoxCollectionItemsNames.Items.Clear();
-            m_InList.Clear();
-            foreach (T item in m_Collection)
-            {
-                currentName = (nameProperty.GetValue(item) as string).ToUpper();
-                if(currentName != null && currentName.Contains(textBoxSearchByName.Text.ToUpper()))
-                {
-                    listBoxCollectionItemsNames.Items.Add(currentName);
-                    m_InList.Add(item);
-                }
-            }
         }
 
         private void initalMainPictureValue(int selectedIndex)
@@ -111,11 +93,65 @@ namespace BasicFacebookFeatures
 
         private void buttonShowPictures_Click(object sender, EventArgs e)
         {
-            if(listBoxCollectionItemsNames.SelectedIndex != null)
+            if(listBoxCollectionItemsNames.SelectedIndex != -1)
             {
                 new FormFacebookCollection<Photo>((m_InList[listBoxCollectionItemsNames.SelectedIndex] as Album).Photos).ShowDialog();
             }
         }
 
+        private void textBoxSearchByName_TextChanged(object sender, EventArgs e)
+        {
+            TextBox textBoxSearch = sender as TextBox;
+
+            if (textBoxSearch != null && textBoxSearch.Focused)
+            {
+                PropertyInfo nameProperty = typeof(T).GetProperty("Name");
+                string currentName = null;
+
+                listBoxCollectionItemsNames.Items.Clear();
+                m_InList.Clear();
+                foreach (T item in m_Collection)
+                {
+                    currentName = nameProperty.GetValue(item) is string ?
+                        nameProperty.GetValue(item) as string : $"No name for {typeof(T).Name}";
+                    if (currentName != null && currentName.ToUpper().Contains(textBoxSearchByName.Text.ToUpper()))
+                    {
+                        listBoxCollectionItemsNames.Items.Add(currentName);
+                        m_InList.Add(item);
+                    }
+                }
+            }
+        }
+
+        private void textBoxSearchByName_Leave(object sender, EventArgs e)
+        {
+            TextBox textBoxSearch = sender as TextBox;
+
+            if (textBoxSearch != null && textBoxSearch.Text == string.Empty)
+            {
+                textBoxSearch.Text = "search";
+            }
+        }
+
+        private void textBoxSearchByName_Enter(object sender, EventArgs e)
+        {
+            TextBox textBoxSearch = sender as TextBox;
+
+            if (textBoxSearch != null && textBoxSearch.Text.Equals("search"))
+            {
+                textBoxSearch.Text = string.Empty;
+            }
+        }
+
+        private void pictureBoxItemMainPhoto_Click(object sender, EventArgs e)
+        {
+            PropertyInfo pictureProperty = typeof(T).GetProperty("PictureNormalURL");
+
+            if (pictureProperty != null && listBoxCollectionItemsNames.SelectedIndex != -1)
+            {
+                new FormPicture(
+                    pictureProperty.GetValue(m_InList[listBoxCollectionItemsNames.SelectedIndex]) as string).ShowDialog();
+            }
+        }
     }
 }

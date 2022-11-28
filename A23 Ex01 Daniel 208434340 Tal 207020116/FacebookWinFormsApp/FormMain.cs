@@ -44,7 +44,8 @@ namespace BasicFacebookFeatures
                     "user_location",
                     "user_photos",
                     "user_posts",
-                    "user_videos");
+                    "user_videos",
+                    "groups_access_member_info");
 
             if (!string.IsNullOrEmpty(m_LoginResult.AccessToken))
             {
@@ -65,8 +66,6 @@ namespace BasicFacebookFeatures
             //fetchThred.Start();
             fetchUserInfo();
             timer1.Enabled = true;
-
-
         }
 
         private void fetchUserInfo()
@@ -157,6 +156,7 @@ namespace BasicFacebookFeatures
                 }
             }
         }
+
         private void fetchAlbums()
         {
             if (m_LoggedInUser.Albums.Count == 0)
@@ -254,7 +254,8 @@ namespace BasicFacebookFeatures
         {
             Post selected = m_LoggedInUser.Posts[listBoxPosts.SelectedIndex];
 
-            labelCurrentPostLikes.Text = string.Format(r_LikesLabelString, selected.LikedBy.Count);
+            // labelCurrentPostLikes.Text = string.Format(r_LikesLabelString, selected.LikedBy.Count); LikedBy throw exception!
+            labelCurrentPostLikes.Text = string.Format(r_LikesLabelString, 1);
             listBoxPostComments.DisplayMember = "Message";
             listBoxPostComments.DataSource = selected.Comments;
         }
@@ -272,7 +273,6 @@ namespace BasicFacebookFeatures
         private void buttonShowAllGroups_Click(object sender, EventArgs e)
         {
             new FormFacebookCollection<Group>(m_LoggedInUser.Groups).ShowDialog();
-
         }
 
         private void buttonShowAllEvents_Click(object sender, EventArgs e)
@@ -280,21 +280,9 @@ namespace BasicFacebookFeatures
             new FormFacebookCollection<Event>(m_LoggedInUser.Events).ShowDialog();
         }
 
-
-        private void labelCurrentPostLikes_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void buttonShowAllAlbums_Click(object sender, EventArgs e)
         {
             new FormFacebookCollection<Album>(m_LoggedInUser.Albums).ShowDialog();
-
         }
 
         private void listBoxAlbums_SelectedIndexChanged(object sender, EventArgs e)
@@ -306,13 +294,13 @@ namespace BasicFacebookFeatures
                 pictureBoxAlbums.LoadAsync(selectedAlbum.PictureAlbumURL);
             }
         }
-    
+
         private void changeRandomPictureInPictureBox()
         {
             var rand = new Random();
-            Album selectedRandomAlbum;
-            Photo selectedRandomPhoto;
-            selectedRandomAlbum = m_LoggedInUser.Albums[rand.Next(0, m_LoggedInUser.Albums.Count)];
+            Album selectedRandomAlbum = m_LoggedInUser.Albums[rand.Next(0, m_LoggedInUser.Albums.Count)];
+            Photo selectedRandomPhoto = null;
+
             if(selectedRandomAlbum != null)
             {
                 if (selectedRandomAlbum.Photos.Count > 0)
@@ -331,9 +319,9 @@ namespace BasicFacebookFeatures
             changeRandomPictureInPictureBox();
         }
 
-        private void listBoxPages_SelectedIndexChanged(object sender, EventArgs e)
+        private void pictureBox_Click(object sender, EventArgs e)
         {
-
+            new FormPicture((sender as PictureBox)?.Image).ShowDialog();
         }
     }
 }
