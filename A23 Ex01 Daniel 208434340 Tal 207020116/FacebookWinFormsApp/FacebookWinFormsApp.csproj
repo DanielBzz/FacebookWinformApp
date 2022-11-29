@@ -112,6 +112,12 @@
     <Compile Include="FormFacebookCollection.Designer.cs">
       <DependentUpon>FormFacebookCollection.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormFindTeam.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormFindTeam.Designer.cs">
+      <DependentUpon>FormFindTeam.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -129,6 +135,9 @@
     <Compile Include="UserDetails.cs" />
     <EmbeddedResource Include="FormFacebookCollection.resx">
       <DependentUpon>FormFacebookCollection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormFindTeam.resx">
+      <DependentUpon>FormFindTeam.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>

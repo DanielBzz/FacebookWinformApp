@@ -17,6 +17,7 @@ namespace BasicFacebookFeatures
         private static readonly string r_LikesLabelString = "Likes: {0}";
         private LoginResult m_LoginResult;
         private User m_LoggedInUser;
+        private FormFindTeam m_FormFindTeam = null;
 
         public FormMain()
         {
@@ -78,7 +79,6 @@ namespace BasicFacebookFeatures
             fetchGroups();
             fetchPages();
             fetchEvents();
-            fetchCheckIns();
             fetchAlbums();
         }
 
@@ -197,17 +197,6 @@ namespace BasicFacebookFeatures
             }
         }
 
-        private void fetchCheckIns()
-        {
-            foreach (Checkin checkIn in m_LoggedInUser.Checkins)
-            {
-                if (checkIn.Name != null)
-                {
-                    listBoxCheckIns.Items.Add(checkIn.Name + ": " + checkIn.Description);
-                }
-            }
-        }
-
         private void fetchGroups()
         {
             if (m_LoggedInUser.Groups.Count == 0)
@@ -285,16 +274,6 @@ namespace BasicFacebookFeatures
             new FormFacebookCollection<Album>(m_LoggedInUser.Albums).ShowDialog();
         }
 
-        private void listBoxAlbums_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Album selectedAlbum = m_LoggedInUser.Albums[listBoxAlbums.SelectedIndex];
-
-            if (selectedAlbum != null)
-            {
-                pictureBoxAlbums.LoadAsync(selectedAlbum.PictureAlbumURL);
-            }
-        }
-
         private void changeRandomPictureInPictureBox()
         {
             var rand = new Random();
@@ -322,6 +301,16 @@ namespace BasicFacebookFeatures
         private void pictureBox_Click(object sender, EventArgs e)
         {
             new FormPicture((sender as PictureBox)?.Image).ShowDialog();
+        }
+
+        private void buttonFindFriends_Click(object sender, EventArgs e)
+        {
+            if (m_FormFindTeam == null)
+            {
+                m_FormFindTeam = new FormFindTeam(m_LoggedInUser);
+            }
+
+            m_FormFindTeam.ShowDialog();
         }
     }
 }

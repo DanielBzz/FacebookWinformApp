@@ -43,7 +43,6 @@
             this.listBoxGroups = new System.Windows.Forms.ListBox();
             this.listBoxEvents = new System.Windows.Forms.ListBox();
             this.listBoxAbout = new System.Windows.Forms.ListBox();
-            this.listBoxCheckIns = new System.Windows.Forms.ListBox();
             this.labelMyFriends = new System.Windows.Forms.Label();
             this.labelMyPosts = new System.Windows.Forms.Label();
             this.labelMyPages = new System.Windows.Forms.Label();
@@ -52,16 +51,14 @@
             this.buttonShowAllGroups = new System.Windows.Forms.Button();
             this.labelMyEvents = new System.Windows.Forms.Label();
             this.buttonShowAllEvents = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.listBoxAlbums = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
             this.buttonShowAllAlbums = new System.Windows.Forms.Button();
-            this.pictureBoxAlbums = new System.Windows.Forms.PictureBox();
             this.pictureBoxChange = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.buttonFindFriends = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCover)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAlbums)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxChange)).BeginInit();
             this.SuspendLayout();
             // 
@@ -211,16 +208,6 @@
             this.listBoxAbout.Size = new System.Drawing.Size(199, 100);
             this.listBoxAbout.TabIndex = 65;
             // 
-            // listBoxCheckIns
-            // 
-            this.listBoxCheckIns.FormattingEnabled = true;
-            this.listBoxCheckIns.ItemHeight = 16;
-            this.listBoxCheckIns.Location = new System.Drawing.Point(108, 556);
-            this.listBoxCheckIns.Margin = new System.Windows.Forms.Padding(4);
-            this.listBoxCheckIns.Name = "listBoxCheckIns";
-            this.listBoxCheckIns.Size = new System.Drawing.Size(236, 36);
-            this.listBoxCheckIns.TabIndex = 66;
-            // 
             // labelMyFriends
             // 
             this.labelMyFriends.AutoSize = true;
@@ -305,15 +292,6 @@
             this.buttonShowAllEvents.UseVisualStyleBackColor = true;
             this.buttonShowAllEvents.Click += new System.EventHandler(this.buttonShowAllEvents_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 556);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(91, 17);
-            this.label1.TabIndex = 76;
-            this.label1.Text = "My Checkins:";
-            // 
             // listBoxAlbums
             // 
             this.listBoxAlbums.FormattingEnabled = true;
@@ -323,7 +301,6 @@
             this.listBoxAlbums.Name = "listBoxAlbums";
             this.listBoxAlbums.Size = new System.Drawing.Size(236, 36);
             this.listBoxAlbums.TabIndex = 77;
-            this.listBoxAlbums.SelectedIndexChanged += new System.EventHandler(this.listBoxAlbums_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -347,16 +324,6 @@
             this.buttonShowAllAlbums.UseVisualStyleBackColor = true;
             this.buttonShowAllAlbums.Click += new System.EventHandler(this.buttonShowAllAlbums_Click);
             // 
-            // pictureBoxAlbums
-            // 
-            this.pictureBoxAlbums.Location = new System.Drawing.Point(108, 480);
-            this.pictureBoxAlbums.Margin = new System.Windows.Forms.Padding(4);
-            this.pictureBoxAlbums.Name = "pictureBoxAlbums";
-            this.pictureBoxAlbums.Size = new System.Drawing.Size(147, 64);
-            this.pictureBoxAlbums.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBoxAlbums.TabIndex = 80;
-            this.pictureBoxAlbums.TabStop = false;
-            // 
             // pictureBoxChange
             // 
             this.pictureBoxChange.Location = new System.Drawing.Point(735, 324);
@@ -373,6 +340,18 @@
             this.timer1.Interval = 5000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // buttonFindFriends
+            // 
+            this.buttonFindFriends.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonFindFriends.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.buttonFindFriends.Location = new System.Drawing.Point(20, 502);
+            this.buttonFindFriends.Name = "buttonFindFriends";
+            this.buttonFindFriends.Size = new System.Drawing.Size(324, 68);
+            this.buttonFindFriends.TabIndex = 82;
+            this.buttonFindFriends.Text = "Find My Team";
+            this.buttonFindFriends.UseVisualStyleBackColor = true;
+            this.buttonFindFriends.Click += new System.EventHandler(this.buttonFindFriends_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -380,12 +359,11 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(1123, 599);
+            this.Controls.Add(this.buttonFindFriends);
             this.Controls.Add(this.pictureBoxChange);
-            this.Controls.Add(this.pictureBoxAlbums);
             this.Controls.Add(this.buttonShowAllAlbums);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.listBoxAlbums);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonShowAllEvents);
             this.Controls.Add(this.labelMyEvents);
             this.Controls.Add(this.buttonShowAllGroups);
@@ -394,7 +372,6 @@
             this.Controls.Add(this.labelMyPages);
             this.Controls.Add(this.labelMyPosts);
             this.Controls.Add(this.labelMyFriends);
-            this.Controls.Add(this.listBoxCheckIns);
             this.Controls.Add(this.listBoxAbout);
             this.Controls.Add(this.listBoxEvents);
             this.Controls.Add(this.listBoxGroups);
@@ -416,7 +393,6 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormMain_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCover)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAlbums)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxChange)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -439,7 +415,6 @@
         private System.Windows.Forms.ListBox listBoxGroups;
         private System.Windows.Forms.ListBox listBoxEvents;
         private System.Windows.Forms.ListBox listBoxAbout;
-        private System.Windows.Forms.ListBox listBoxCheckIns;
         private System.Windows.Forms.Label labelMyFriends;
         private System.Windows.Forms.Label labelMyPosts;
         private System.Windows.Forms.Label labelMyPages;
@@ -448,12 +423,11 @@
         private System.Windows.Forms.Button buttonShowAllGroups;
         private System.Windows.Forms.Label labelMyEvents;
         private System.Windows.Forms.Button buttonShowAllEvents;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListBox listBoxAlbums;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button buttonShowAllAlbums;
-        private System.Windows.Forms.PictureBox pictureBoxAlbums;
         private System.Windows.Forms.PictureBox pictureBoxChange;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Button buttonFindFriends;
     }
 }

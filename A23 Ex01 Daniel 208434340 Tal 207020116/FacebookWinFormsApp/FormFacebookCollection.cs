@@ -87,7 +87,6 @@ namespace BasicFacebookFeatures
             if (selectedAlbum != null)
             {
                 pictureBoxItemMainPhoto.LoadAsync(selectedAlbum.PictureAlbumURL);
-
             }
         }
 
