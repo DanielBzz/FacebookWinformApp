@@ -15,56 +15,24 @@ namespace BasicFacebookFeatures
     public partial class FormMain : Form
     {
         private static readonly string r_LikesLabelString = "Likes: {0}";
+        private bool m_RememberUser;
         private LoginResult m_LoginResult;
         private User m_LoggedInUser;
         private FormFindTeam m_FormFindTeam = null;
+        public bool LogoutPressed { get; set; }
 
-        public FormMain()
+        public FormMain(LoginResult i_LoginResult, bool i_RememberUser)
         {
             InitializeComponent();
             FacebookWrapper.FacebookService.s_CollectionLimit = 100;
-            isRememberLastUser();
+            m_LoginResult = i_LoginResult;
+            m_LoggedInUser = m_LoginResult.LoggedInUser;
+            m_RememberUser = i_RememberUser;
         }
 
-        private void buttonLogin_Click(object sender, EventArgs e)
-        {
-            m_LoginResult = FacebookService.Login(
-                    /// (This is Desig Patter's App ID. replace it with your own)
-                    "878533360263979",
-                    /// requested permissions:
-                    "email",
-                    "public_profile",
-                    "user_age_range",
-                    "user_birthday",
-                    "user_events",
-                    "user_friends",
-                    "user_gender",
-                    "user_hometown",
-                    "user_likes",
-                    "user_link",
-                    "user_location",
-                    "user_photos",
-                    "user_posts",
-                    "user_videos",
-                    "groups_access_member_info");
-
-            if (!string.IsNullOrEmpty(m_LoginResult.AccessToken))
-            {
-                m_LoggedInUser = m_LoginResult.LoggedInUser;
-                whenConnected();
-            }
-            else
-            {
-                MessageBox.Show(m_LoginResult.ErrorMessage, "Login Failed");
-            }
-        }
-
-        private void whenConnected()
+        public void whenConnected()
         {
             Text = $"{m_LoggedInUser.Name}'s Profile";
-            checkBoxRememberMe.Enabled = true;
-            //Thread fetchThred = new Thread(fetchUserInfo);
-            //fetchThred.Start();
             fetchUserInfo();
             timer1.Enabled = true;
         }
@@ -216,26 +184,14 @@ namespace BasicFacebookFeatures
         private void buttonLogout_Click(object sender, EventArgs e)
         {
 			FacebookService.LogoutWithUI();
-			buttonLogin.Text = "Login";
-			checkBoxRememberMe.Checked = false;
-			checkBoxRememberMe.Enabled = false;
-        }
-
-        private void isRememberLastUser()
-        {
-            UserDetails lastUser = UserDetails.LoadFromFile();
-
-            if (lastUser.Remember)
-            {
-                m_LoginResult = FacebookService.Connect(lastUser.UserToken);
-                m_LoggedInUser = m_LoginResult.LoggedInUser;
-                whenConnected();
-            }
+			m_RememberUser = false;
+			LogoutPressed = true;
+			Close();
         }
 
         private void FormMain_FormClosed(object sender, FormClosedEventArgs e)
         {
-            string token = checkBoxRememberMe.Checked ? m_LoginResult.AccessToken : null;
+            string token = m_RememberUser ? m_LoginResult.AccessToken : null;
             new UserDetails(token).SaveToFile();
         }
 

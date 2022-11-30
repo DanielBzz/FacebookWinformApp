@@ -47,7 +47,11 @@ namespace BasicFacebookFeatures
             {
                 MessageBox.Show("you should initial the age range boxes");
             }
-            else if (checkedListBoxGroups.Items.Count == 0 && checkedListBoxPages.Items.Count == 0)
+            else if((int)comboBoxMaxAge.SelectedItem < (int)comboBoxMinAge.SelectedItem)
+            {
+                MessageBox.Show("your minmum age choice is bigger than the maximum age choice");
+            }
+            else if (checkedListBoxGroups.CheckedItems.Count == 0 && checkedListBoxPages.CheckedItems.Count == 0)
             {
                 MessageBox.Show("you should choose at least one item");
             }
