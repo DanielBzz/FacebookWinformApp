@@ -34,7 +34,8 @@
             // 
             // pictureBox
             // 
-            this.pictureBox.Location = new System.Drawing.Point(280, 207);
+            this.pictureBox.Location = new System.Drawing.Point(315, 259);
+            this.pictureBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pictureBox.Name = "pictureBox";
             this.pictureBox.Size = new System.Drawing.Size(100, 50);
             this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -43,11 +44,13 @@
             // 
             // FormPicture
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(656, 483);
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(738, 604);
             this.Controls.Add(this.pictureBox);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "FormPicture";
             this.Text = "FormPicture";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();

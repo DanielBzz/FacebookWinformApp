@@ -22,8 +22,13 @@ namespace BasicFacebookFeatures
             do
             {
                 loginForm = new FormLogin();
-                Application.Run(loginForm);
-                if (loginForm.MainApp != null)
+
+                if (!loginForm.isUserConnected())
+                {
+                    Application.Run(loginForm);
+                }
+
+                if (loginForm.isUserConnected())
                 {
                     Application.Run(loginForm.MainApp);
                 }

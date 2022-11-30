@@ -29,6 +29,11 @@ namespace BasicFacebookFeatures
             isRememberLastUser();
         }
 
+        public bool isUserConnected()
+        {
+            return m_MainApp != null;
+        }
+
         private void buttonLogin_Click(object sender, EventArgs e)
         {
             LoginResult loginResult = FacebookService.Login(
@@ -68,6 +73,7 @@ namespace BasicFacebookFeatures
             if (lastUser.Remember)
             {
                 LoginResult loginResult = FacebookService.Connect(lastUser.UserToken);
+                checkBoxRememberMe.Checked = true;
                 initialMainApp(loginResult);
             }
         }
