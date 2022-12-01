@@ -40,6 +40,7 @@
             this.buttonFindFriends = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.listBoxFriends = new System.Windows.Forms.ListBox();
+            this.labelFriendsUpdate = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // labelMain
@@ -142,7 +143,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(656, 269);
+            this.label3.Location = new System.Drawing.Point(658, 288);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(116, 24);
             this.label3.TabIndex = 10;
@@ -152,11 +153,19 @@
             // 
             this.listBoxFriends.FormattingEnabled = true;
             this.listBoxFriends.ItemHeight = 20;
-            this.listBoxFriends.Location = new System.Drawing.Point(660, 302);
+            this.listBoxFriends.Location = new System.Drawing.Point(662, 321);
             this.listBoxFriends.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.listBoxFriends.Name = "listBoxFriends";
             this.listBoxFriends.Size = new System.Drawing.Size(226, 204);
             this.listBoxFriends.TabIndex = 11;
+            // 
+            // labelFriendsUpdate
+            // 
+            this.labelFriendsUpdate.AutoSize = true;
+            this.labelFriendsUpdate.Location = new System.Drawing.Point(658, 253);
+            this.labelFriendsUpdate.Name = "labelFriendsUpdate";
+            this.labelFriendsUpdate.Size = new System.Drawing.Size(0, 20);
+            this.labelFriendsUpdate.TabIndex = 12;
             // 
             // FormFindTeam
             // 
@@ -166,6 +175,7 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(900, 562);
+            this.Controls.Add(this.labelFriendsUpdate);
             this.Controls.Add(this.listBoxFriends);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.buttonFindFriends);
@@ -200,5 +210,6 @@
         private System.Windows.Forms.Button buttonFindFriends;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ListBox listBoxFriends;
+        private System.Windows.Forms.Label labelFriendsUpdate;
     }
 }

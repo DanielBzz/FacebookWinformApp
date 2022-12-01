@@ -1,19 +1,16 @@
-﻿using FacebookWrapper.ObjectModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using FacebookEngine;
+using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures
 {
     public partial class FormFindTeam : Form
     {
         private User m_LoggedInUser;
+        private FindTeamLogic m_FindTeamLogic;
 
         public FormFindTeam(User i_User)
         {
@@ -26,6 +23,7 @@ namespace BasicFacebookFeatures
             }
 
             initialLists();
+            m_FindTeamLogic = new FindTeamLogic(m_LoggedInUser);
         }
 
         private void initialLists()
@@ -43,6 +41,7 @@ namespace BasicFacebookFeatures
 
         private void buttonFindFriends_Click(object sender, EventArgs e)
         {
+            labelFriendsUpdate.Text = string.Empty;
             if (comboBoxMaxAge.SelectedItem == null || comboBoxMinAge.SelectedItem == null)
             {
                 MessageBox.Show("you should initial the age range boxes");
@@ -57,67 +56,18 @@ namespace BasicFacebookFeatures
             }
             else
             {
-                findFriends();
-            }
-        }
+                List<string> friendsNames = m_FindTeamLogic.FindFriendsInTeam(
+                    checkedListBoxPages.CheckedItems.OfType<string>(),
+                    checkedListBoxGroups.CheckedItems.OfType<string>(),
+                    (int)comboBoxMinAge.SelectedItem,
+                    (int)comboBoxMaxAge.SelectedItem);
 
-        private void findFriends()
-        {
-            bool haveSamePages = false;
-            bool haveSameGroups = false;
-            int counter = 0;
-
-            foreach (User friend in m_LoggedInUser.Friends)
-            {
-                foreach (string pageName in checkedListBoxPages.CheckedItems)
+                friendsNames.ForEach(item => listBoxFriends.Items.Add(item));
+                if (friendsNames.Count == 0)
                 {
-                    foreach (Page friendPage in friend.LikedPages)
-                    {
-                        counter = pageName.Equals(friendPage.Name) ? counter + 1 : counter;
-                    }
-                }
-
-                haveSamePages = counter == checkedListBoxPages.CheckedItems.Count;
-                counter = 0;
-                foreach (string groupName in checkedListBoxGroups.CheckedItems)
-                {
-                    foreach (Group friendGroup in friend.Groups)
-                    {
-                        counter = groupName.Equals(friendGroup.Name) ? counter + 1 : counter;
-                    }
-                }
-
-                haveSameGroups = counter == checkedListBoxGroups.CheckedItems.Count;
-                counter = 0;
-
-                if (haveSamePages && haveSameGroups && inAgeRange())
-                {
-                    listBoxFriends.Items.Add(friend.Name);
+                    labelFriendsUpdate.Text = "No friends are found";
                 }
             }
-        }
-
-        private bool inAgeRange()
-        {
-            bool inRange = false;
-            DateTime time = DateTime.Now;
-
-            try
-            {
-                DateTime userBirthday = DateTime.Parse(m_LoggedInUser.Birthday);
-
-                int age = time.Year - userBirthday.Year;
-
-                age = time.Month < userBirthday.Month ||
-                    (time.Month == userBirthday.Month && time.Day < userBirthday.Day) ? age - 1 : age;
-                inRange = age <= (int)comboBoxMaxAge.SelectedItem && age >= (int)comboBoxMinAge.SelectedItem;
-            }
-            catch (Exception)
-            {
-                inRange = false;
-            }
-
-            return inRange;
         }
     }
 }

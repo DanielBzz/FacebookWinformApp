@@ -1,46 +1,39 @@
-﻿using FacebookWrapper.ObjectModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.CheckedListBox;
+using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures
 {
     public partial class FormFacebookCollection<T> : Form
     {
-
-        private readonly FacebookObjectCollection<T> m_Collection;
+        private readonly FacebookObjectCollection<T> r_FullCollection;
         private List<T> m_InList;
 
         public FormFacebookCollection(FacebookObjectCollection<T> i_Collection)
         {
-            m_Collection = i_Collection;
-            m_InList = new List<T>(i_Collection.Count);
             InitializeComponent();
-            initialComponent();
+            r_FullCollection = i_Collection;
+            m_InList = new List<T>(i_Collection.Count);
             Text = $"{typeof(T).Name}s list";
+            initialComponent();
         }
 
         public void initialComponent()
         {
             PropertyInfo nameProperty = typeof(T).GetProperty("Name");
+            string name = null;
 
-            foreach (T item in m_Collection)
+            foreach (T item in r_FullCollection)
             {
-                string name = nameProperty.GetValue(item) is string ?
+                name = nameProperty.GetValue(item) is string ?
                     nameProperty.GetValue(item) as string : $"No name for {typeof(T).Name}";
                 listBoxCollectionItemsNames.Items.Add(name);
                 m_InList.Add(item);
             }
 
-            if (m_Collection.Count == 0)
+            if (r_FullCollection.Count == 0)
             {
                 listBoxCollectionItemsNames.Items.Add($"No {typeof(T).Name}s to show");
                 textBoxSearchByName.Enabled = false;
@@ -55,7 +48,7 @@ namespace BasicFacebookFeatures
             initialDescriptionValue(listBoxCollectionItemsNames.SelectedIndex);
         }
 
-        private void initalMainPictureValue(int selectedIndex)
+        private void initalMainPictureValue(int i_SelectedIndex)
         {
             PropertyInfo pictureProperty = typeof(T).GetProperty("PictureNormalURL");
 
@@ -109,7 +102,7 @@ namespace BasicFacebookFeatures
 
                 listBoxCollectionItemsNames.Items.Clear();
                 m_InList.Clear();
-                foreach (T item in m_Collection)
+                foreach (T item in r_FullCollection)
                 {
                     currentName = nameProperty.GetValue(item) is string ?
                         nameProperty.GetValue(item) as string : $"No name for {typeof(T).Name}";

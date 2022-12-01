@@ -1,24 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Windows.Forms;
 using FacebookWrapper.ObjectModel;
 using FacebookWrapper;
+using FacebookEngine;
 
 namespace BasicFacebookFeatures
 {
     public partial class FormMain : Form
     {
-        private static readonly string r_LikesLabelString = "Likes: {0}";
+        private static readonly string rs_LikesLabelString = "Likes: {0}";
+        private readonly Random r_Random = new Random();
         private bool m_RememberUser;
         private LoginResult m_LoginResult;
         private User m_LoggedInUser;
         private FormFindTeam m_FormFindTeam = null;
+
         public bool LogoutPressed { get; set; }
 
         public FormMain(LoginResult i_LoginResult, bool i_RememberUser)
@@ -57,16 +53,6 @@ namespace BasicFacebookFeatures
             if (coverAlbum != null)
             {
                 pictureBoxCover.LoadAsync(coverAlbum.PictureAlbumURL);
-            }
-            else
-            {
-                string names = string.Empty;
-                foreach (Album album in m_LoggedInUser.Albums)
-                {
-                    names += Environment.NewLine + album.Name;
-                }
-
-                MessageBox.Show(names);
             }
         }
 
@@ -200,7 +186,7 @@ namespace BasicFacebookFeatures
             Post selected = m_LoggedInUser.Posts[listBoxPosts.SelectedIndex];
 
             // labelCurrentPostLikes.Text = string.Format(r_LikesLabelString, selected.LikedBy.Count); LikedBy throw exception!
-            labelCurrentPostLikes.Text = string.Format(r_LikesLabelString, 1);
+            labelCurrentPostLikes.Text = string.Format(rs_LikesLabelString, 1);
             listBoxPostComments.DisplayMember = "Message";
             listBoxPostComments.DataSource = selected.Comments;
         }
@@ -232,15 +218,14 @@ namespace BasicFacebookFeatures
 
         private void changeRandomPictureInPictureBox()
         {
-            var rand = new Random();
-            Album selectedRandomAlbum = m_LoggedInUser.Albums[rand.Next(0, m_LoggedInUser.Albums.Count)];
+            Album selectedRandomAlbum = m_LoggedInUser.Albums[r_Random.Next(0, m_LoggedInUser.Albums.Count)];
             Photo selectedRandomPhoto = null;
 
             if(selectedRandomAlbum != null)
             {
                 if (selectedRandomAlbum.Photos.Count > 0)
                 {
-                    selectedRandomPhoto = selectedRandomAlbum.Photos[rand.Next(0, selectedRandomAlbum.Photos.Count)];
+                    selectedRandomPhoto = selectedRandomAlbum.Photos[r_Random.Next(0, selectedRandomAlbum.Photos.Count)];
                     if (selectedRandomPhoto != null)
                     {
                         pictureBoxChange.LoadAsync(selectedRandomPhoto.PictureNormalURL);

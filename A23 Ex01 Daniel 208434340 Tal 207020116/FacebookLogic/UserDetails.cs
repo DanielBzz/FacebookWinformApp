@@ -1,40 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace BasicFacebookFeatures
+namespace FacebookEngine
 {
     public class UserDetails
     {
-        public string m_Token;
+        private const string k_FileName = "userDetails.xml";
+        private static string r_FilePath = Path.Combine(Environment.CurrentDirectory, k_FileName);
+        public string UserToken { get; }
+
+        public UserDetails(string i_Token)
+        {
+            UserToken = i_Token;
+        }
 
         private UserDetails()
         {
-            m_Token = null;
-        }
-
-        public UserDetails(string token)
-        {
-            m_Token = token;
+            UserToken = null;
         }
 
         public bool Remember
         {
             get
             {
-                return m_Token != null;
-            }
-        }
-
-        public string UserToken
-        {
-            get
-            {
-                return m_Token;
+                return UserToken != null;
             }
         }
 
@@ -45,10 +35,7 @@ namespace BasicFacebookFeatures
 
             try
             {
-                string fileName = "userDetails.xml";
-                string filePath = Path.Combine(Environment.CurrentDirectory, fileName);
-
-                stream = new FileStream(filePath, FileMode.Open);
+                stream = new FileStream(r_FilePath, FileMode.Open);
                 XmlSerializer serializer = new XmlSerializer(typeof(UserDetails));
                 lastUser = serializer.Deserialize(stream) as UserDetails;
             }
@@ -66,12 +53,10 @@ namespace BasicFacebookFeatures
 
         public void SaveToFile()
         {
-            string fileName = "userDetails.xml";
-            string filePath = Path.Combine(Environment.CurrentDirectory, fileName);
-            FileMode mode = File.Exists(filePath) ?
+            FileMode mode = File.Exists(r_FilePath) ?
                 FileMode.Truncate : FileMode.Create;
 
-            using (Stream stream = new FileStream(filePath, mode))
+            using (Stream stream = new FileStream(r_FilePath, mode))
             {
                 XmlSerializer serializer = new XmlSerializer(GetType());
                 serializer.Serialize(stream, this);

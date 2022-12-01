@@ -1,13 +1,7 @@
-﻿using FacebookWrapper;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows.Forms;
+using FacebookEngine;
+using FacebookWrapper;
 
 namespace BasicFacebookFeatures
 {
@@ -26,7 +20,7 @@ namespace BasicFacebookFeatures
         public FormLogin()
         {
             InitializeComponent();
-            isRememberLastUser();
+            checkIfRememberLastUser();
         }
 
         public bool isUserConnected()
@@ -62,11 +56,11 @@ namespace BasicFacebookFeatures
             }
             else
             {
-                MessageBox.Show(loginResult.ErrorMessage, "Login Failed") ;
+                MessageBox.Show(loginResult.ErrorMessage, "Login Failed");
             }
         }
 
-        private void isRememberLastUser()
+        private void checkIfRememberLastUser()
         {
             UserDetails lastUser = UserDetails.LoadFromFile();
 
