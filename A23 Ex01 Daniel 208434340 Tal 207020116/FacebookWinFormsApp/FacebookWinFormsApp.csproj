@@ -77,16 +77,14 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CefSharp.BrowserSubprocess.Core, Version=87.1.132.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\CefSharp.Common.87.1.132\CefSharp\x64\CefSharp.BrowserSubprocess.Core.dll</HintPath>
+    <Reference Include="CefSharp">
+      <HintPath>..\..\..\..\..\Desktop\A23 Ex01 DanielBazis 208434340 TalMeschiany 207020116\packages\CefSharp.Common.87.1.132\lib\net452\CefSharp.dll</HintPath>
     </Reference>
-    <Reference Include="CefSharp.Core.Runtime, Version=87.1.132.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\CefSharp.Common.87.1.132\CefSharp\x64\CefSharp.Core.Runtime.dll</HintPath>
+    <Reference Include="CefSharp.Core">
+      <HintPath>..\..\..\..\..\Desktop\A23 Ex01 DanielBazis 208434340 TalMeschiany 207020116\packages\CefSharp.Common.87.1.132\lib\net452\CefSharp.Core.dll</HintPath>
     </Reference>
     <Reference Include="CefSharp.WinForms">
-      <HintPath>..\packages\CefSharp.WinForms.87.1.132\lib\net452\CefSharp.WinForms.dll</HintPath>
+      <HintPath>..\..\..\..\..\Desktop\A23 Ex01 DanielBazis 208434340 TalMeschiany 207020116\packages\CefSharp.WinForms.87.1.132\lib\net452\CefSharp.WinForms.dll</HintPath>
     </Reference>
     <Reference Include="Facebook">
       <HintPath>..\FBApi\Facebook.dll</HintPath>
@@ -104,7 +102,6 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -115,27 +112,19 @@
     <Compile Include="FormFacebookCollection.Designer.cs">
       <DependentUpon>FormFacebookCollection.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormFindTeam.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="FormFindTeam.cs" />
     <Compile Include="FormFindTeam.Designer.cs">
       <DependentUpon>FormFindTeam.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormLogin.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="FormLogin.cs" />
     <Compile Include="FormLogin.Designer.cs">
       <DependentUpon>FormLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormMain.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="FormMain.cs" />
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormPicture.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="FormPicture.cs" />
     <Compile Include="FormPicture.Designer.cs">
       <DependentUpon>FormPicture.cs</DependentUpon>
     </Compile>
