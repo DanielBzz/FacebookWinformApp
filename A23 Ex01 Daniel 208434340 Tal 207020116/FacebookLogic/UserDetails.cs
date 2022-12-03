@@ -7,24 +7,24 @@ namespace FacebookEngine
     public class UserDetails
     {
         private const string k_FileName = "userDetails.xml";
-        private static string r_FilePath = Path.Combine(Environment.CurrentDirectory, k_FileName);
-        public string UserToken { get; }
+        private static readonly  string sr_FilePath = Path.Combine(Environment.CurrentDirectory, k_FileName);
+        public string m_UserToken;
 
         public UserDetails(string i_Token)
         {
-            UserToken = i_Token;
+            m_UserToken = i_Token;
         }
 
         private UserDetails()
         {
-            UserToken = null;
+            m_UserToken = null;
         }
 
         public bool Remember
         {
             get
             {
-                return UserToken != null;
+                return m_UserToken != null;
             }
         }
 
@@ -35,7 +35,7 @@ namespace FacebookEngine
 
             try
             {
-                stream = new FileStream(r_FilePath, FileMode.Open);
+                stream = new FileStream(sr_FilePath, FileMode.Open);
                 XmlSerializer serializer = new XmlSerializer(typeof(UserDetails));
                 lastUser = serializer.Deserialize(stream) as UserDetails;
             }
@@ -53,10 +53,10 @@ namespace FacebookEngine
 
         public void SaveToFile()
         {
-            FileMode mode = File.Exists(r_FilePath) ?
+            FileMode mode = File.Exists(sr_FilePath) ?
                 FileMode.Truncate : FileMode.Create;
 
-            using (Stream stream = new FileStream(r_FilePath, mode))
+            using (Stream stream = new FileStream(sr_FilePath, mode))
             {
                 XmlSerializer serializer = new XmlSerializer(GetType());
                 serializer.Serialize(stream, this);

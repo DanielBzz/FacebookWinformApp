@@ -66,7 +66,7 @@ namespace BasicFacebookFeatures
 
             if (lastUser.Remember)
             {
-                LoginResult loginResult = FacebookService.Connect(lastUser.UserToken);
+                LoginResult loginResult = FacebookService.Connect(lastUser.m_UserToken);
                 checkBoxRememberMe.Checked = true;
                 initialMainApp(loginResult);
             }
