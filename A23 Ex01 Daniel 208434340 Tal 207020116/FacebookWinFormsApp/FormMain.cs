@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using FacebookWrapper.ObjectModel;
 using FacebookWrapper;
 using FacebookEngine;
+using System.Threading;
 
 namespace BasicFacebookFeatures
 {
@@ -36,14 +37,14 @@ namespace BasicFacebookFeatures
         private void fetchUserInfo()
         {
             pictureBoxProfile.LoadAsync(m_LoggedInUser.PictureNormalURL);
-            fetchCoverPhoto();
-            fetchFriendsList();
-            fetchPosts();
-            fetchAbout();
-            fetchGroups();
-            fetchPages();
-            fetchEvents();
-            fetchAlbums();
+            new Thread(() => fetchCoverPhoto()).Start();
+            new Thread(() => fetchFriendsList()).Start();
+            new Thread(() => fetchPosts()).Start();
+            //fetchAbout();
+            new Thread(() => fetchGroups()).Start();
+            new Thread(() => fetchPages()).Start();
+            new Thread(() => fetchEvents()).Start();
+            new Thread(() => fetchAlbums()).Start();
         }
 
         private void fetchCoverPhoto()
@@ -52,7 +53,7 @@ namespace BasicFacebookFeatures
 
             if (coverAlbum != null)
             {
-                pictureBoxCover.LoadAsync(coverAlbum.PictureAlbumURL);
+                pictureBoxCover.Invoke(new Action(() => pictureBoxCover.LoadAsync(coverAlbum.PictureAlbumURL)));
             }
         }
 
@@ -67,7 +68,7 @@ namespace BasicFacebookFeatures
             {
                 if (post.Message != null)
                 {
-                    listBoxPosts.Items.Add(post.CreatedTime + ": " + post.Message);
+                    listBoxAbout.Invoke(new Action(() => listBoxPosts.Items.Add(post.CreatedTime + ": " + post.Message)));
                 }
             }
         }
@@ -79,7 +80,7 @@ namespace BasicFacebookFeatures
 
             for (int i = 0; i < numOfFriendsToShow; i++)
             {
-                listBoxFriends.Items.Add(m_LoggedInUser.Friends[0].UserName);
+                listBoxFriends.Invoke(new Action(() => listBoxFriends.Items.Add(m_LoggedInUser.Friends[0].UserName)));
             }
         }
 
@@ -91,7 +92,8 @@ namespace BasicFacebookFeatures
 
             for (int i = 0; i < numOfPagesToShow; i++)
             {
-                listBoxPages.Items.Add(m_LoggedInUser.LikedPages[rand.Next(0, m_LoggedInUser.LikedPages.Count)].Name);
+                listBoxPages.Invoke(new Action(
+                    () => listBoxPages.Items.Add(m_LoggedInUser.LikedPages[rand.Next(0, m_LoggedInUser.LikedPages.Count)].Name)));
             }
         }
 
@@ -99,14 +101,14 @@ namespace BasicFacebookFeatures
         {
             if (m_LoggedInUser.Events.Count == 0)
             {
-                listBoxEvents.Items.Add("You don't have any upcoming events");
+                listBoxEvents.Invoke(new Action(() => listBoxEvents.Items.Add("You don't have any upcoming events")));
             }
 
             foreach (Event evnt in m_LoggedInUser.Events)
             {
                 if (evnt.Name != null)
                 {
-                    listBoxEvents.Items.Add(evnt.Name + ": " + evnt.Description);
+                    listBoxEvents.Invoke(new Action(() => listBoxEvents.Items.Add(evnt.Name + ": " + evnt.Description)));
                 }
             }
         }
@@ -115,14 +117,14 @@ namespace BasicFacebookFeatures
         {
             if (m_LoggedInUser.Albums.Count == 0)
             {
-                listBoxAlbums.Items.Add("You don't have albums");
+                listBoxAlbums.Invoke(new Action(() => listBoxAlbums.Items.Add("You don't have albums")));
             }
 
             foreach (Album album in m_LoggedInUser.Albums)
             {
                 if (album.Name != null)
                 {
-                    listBoxAlbums.Items.Add(album.Name + ": " + album.Description);
+                    listBoxAlbums.Invoke(new Action(() => listBoxAlbums.Items.Add(album.Name + ": " + album.Description)));
                 }
             }
         }
@@ -155,14 +157,14 @@ namespace BasicFacebookFeatures
         {
             if (m_LoggedInUser.Groups.Count == 0)
             {
-                listBoxGroups.Items.Add("You don't belong to any group");
+                listBoxGroups.Invoke(new Action(() => listBoxGroups.Items.Add("You don't belong to any group")));
             }
 
             foreach (Group group in m_LoggedInUser.Groups)
             {
                 if (group.Name != null)
                 {
-                    listBoxGroups.Items.Add(group.Name);
+                    listBoxGroups.Invoke(new Action(() => listBoxGroups.Items.Add(group.Name)));
                 }
             }
         }
@@ -236,7 +238,7 @@ namespace BasicFacebookFeatures
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            changeRandomPictureInPictureBox();
+            new Thread(() => changeRandomPictureInPictureBox()).Start();
         }
 
         private void pictureBox_Click(object sender, EventArgs e)
