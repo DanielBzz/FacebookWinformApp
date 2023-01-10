@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.Label likesCountLabel;
             this.labelMain = new System.Windows.Forms.Label();
             this.labelFeatureExplanation = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -41,8 +43,16 @@
             this.label3 = new System.Windows.Forms.Label();
             this.listBoxFriends = new System.Windows.Forms.ListBox();
             this.labelFriendsUpdate = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBoxPopularity = new System.Windows.Forms.CheckBox();
+            this.pageBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.imageNormalPictureBox = new System.Windows.Forms.PictureBox();
+            this.likesCountLabel1 = new System.Windows.Forms.Label();
+            this.groupBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.imageNormalPictureBox1 = new System.Windows.Forms.PictureBox();
+            likesCountLabel = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.pageBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageNormalPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageNormalPictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // labelMain
@@ -77,6 +87,7 @@
             // 
             // checkedListBoxPages
             // 
+            this.checkedListBoxPages.DataBindings.Add(new System.Windows.Forms.Binding("SelectedIndex", this.pageBindingSource, "Name", true));
             this.checkedListBoxPages.FormattingEnabled = true;
             this.checkedListBoxPages.Location = new System.Drawing.Point(17, 159);
             this.checkedListBoxPages.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -169,27 +180,51 @@
             this.labelFriendsUpdate.Size = new System.Drawing.Size(0, 17);
             this.labelFriendsUpdate.TabIndex = 12;
             // 
-            // checkBox1
+            // pageBindingSource
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(0, 0);
-            this.checkBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(98, 21);
-            this.checkBox1.TabIndex = 13;
-            this.checkBox1.Text = "checkBox1";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.pageBindingSource.DataSource = typeof(FacebookWrapper.ObjectModel.Page);
             // 
-            // checkBoxPopularity
+            // imageNormalPictureBox
             // 
-            this.checkBoxPopularity.AutoSize = true;
-            this.checkBoxPopularity.Location = new System.Drawing.Point(267, 137);
-            this.checkBoxPopularity.Margin = new System.Windows.Forms.Padding(4);
-            this.checkBoxPopularity.Name = "checkBoxPopularity";
-            this.checkBoxPopularity.Size = new System.Drawing.Size(146, 21);
-            this.checkBoxPopularity.TabIndex = 14;
-            this.checkBoxPopularity.Text = "Filter by popularity";
-            this.checkBoxPopularity.UseVisualStyleBackColor = true;
+            this.imageNormalPictureBox.DataBindings.Add(new System.Windows.Forms.Binding("Image", this.pageBindingSource, "ImageNormal", true));
+            this.imageNormalPictureBox.Location = new System.Drawing.Point(23, 332);
+            this.imageNormalPictureBox.Name = "imageNormalPictureBox";
+            this.imageNormalPictureBox.Size = new System.Drawing.Size(83, 60);
+            this.imageNormalPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.imageNormalPictureBox.TabIndex = 14;
+            this.imageNormalPictureBox.TabStop = false;
+            // 
+            // likesCountLabel
+            // 
+            likesCountLabel.AutoSize = true;
+            likesCountLabel.Location = new System.Drawing.Point(20, 306);
+            likesCountLabel.Name = "likesCountLabel";
+            likesCountLabel.Size = new System.Drawing.Size(86, 17);
+            likesCountLabel.TabIndex = 15;
+            likesCountLabel.Text = "Likes Count:";
+            // 
+            // likesCountLabel1
+            // 
+            this.likesCountLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.pageBindingSource, "LikesCount", true));
+            this.likesCountLabel1.Location = new System.Drawing.Point(125, 306);
+            this.likesCountLabel1.Name = "likesCountLabel1";
+            this.likesCountLabel1.Size = new System.Drawing.Size(100, 23);
+            this.likesCountLabel1.TabIndex = 16;
+            this.likesCountLabel1.Text = "label4";
+            // 
+            // groupBindingSource
+            // 
+            this.groupBindingSource.DataSource = typeof(FacebookWrapper.ObjectModel.Group);
+            // 
+            // imageNormalPictureBox1
+            // 
+            this.imageNormalPictureBox1.DataBindings.Add(new System.Windows.Forms.Binding("Image", this.groupBindingSource, "ImageNormal", true));
+            this.imageNormalPictureBox1.Location = new System.Drawing.Point(264, 332);
+            this.imageNormalPictureBox1.Name = "imageNormalPictureBox1";
+            this.imageNormalPictureBox1.Size = new System.Drawing.Size(77, 60);
+            this.imageNormalPictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.imageNormalPictureBox1.TabIndex = 17;
+            this.imageNormalPictureBox1.TabStop = false;
             // 
             // FormFindTeam
             // 
@@ -198,9 +233,11 @@
             this.AutoScroll = true;
             this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(800, 479);
-            this.Controls.Add(this.checkBoxPopularity);
-            this.Controls.Add(this.checkBox1);
+            this.ClientSize = new System.Drawing.Size(809, 490);
+            this.Controls.Add(this.imageNormalPictureBox1);
+            this.Controls.Add(this.imageNormalPictureBox);
+            this.Controls.Add(likesCountLabel);
+            this.Controls.Add(this.likesCountLabel1);
             this.Controls.Add(this.labelFriendsUpdate);
             this.Controls.Add(this.listBoxFriends);
             this.Controls.Add(this.label3);
@@ -217,6 +254,10 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "FormFindTeam";
             this.Text = "FormFindTeam";
+            ((System.ComponentModel.ISupportInitialize)(this.pageBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageNormalPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageNormalPictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -237,7 +278,10 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ListBox listBoxFriends;
         private System.Windows.Forms.Label labelFriendsUpdate;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.CheckBox checkBoxPopularity;
+        private System.Windows.Forms.BindingSource pageBindingSource;
+        private System.Windows.Forms.PictureBox imageNormalPictureBox;
+        private System.Windows.Forms.Label likesCountLabel1;
+        private System.Windows.Forms.BindingSource groupBindingSource;
+        private System.Windows.Forms.PictureBox imageNormalPictureBox1;
     }
 }

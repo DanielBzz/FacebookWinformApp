@@ -33,15 +33,12 @@ namespace BasicFacebookFeatures
 
         private void initialLists()
         {
-            foreach (Page page in m_LoggedInUser.LikedPages)
-            {
-                checkedListBoxPages.Items.Add(page);
-            }
-
-            foreach (Group group in m_LoggedInUser.Groups)
-            {
-                checkedListBoxGroups.Items.Add(group);
-            }
+            pageBindingSource.DataSource = m_LoggedInUser.LikedPages;
+            (checkedListBoxPages as ListBox).DataSource = pageBindingSource;
+            (checkedListBoxPages as ListBox).DisplayMember = "Name";
+            groupBindingSource.DataSource = m_LoggedInUser.Groups;
+            (checkedListBoxGroups as ListBox).DataSource = groupBindingSource;
+            (checkedListBoxGroups as ListBox).DisplayMember = "Name";
         }
 
         private void buttonFindFriends_Click(object sender, EventArgs e)

@@ -68,7 +68,7 @@
             // buttonLogout
             // 
             this.buttonLogout.Location = new System.Drawing.Point(12, 14);
-            this.buttonLogout.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonLogout.Margin = new System.Windows.Forms.Padding(4);
             this.buttonLogout.Name = "buttonLogout";
             this.buttonLogout.Size = new System.Drawing.Size(239, 28);
             this.buttonLogout.TabIndex = 52;
@@ -105,7 +105,7 @@
             this.listBoxFriends.Location = new System.Drawing.Point(108, 324);
             this.listBoxFriends.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.listBoxFriends.Name = "listBoxFriends";
-            this.listBoxFriends.Size = new System.Drawing.Size(236, 36);
+            this.listBoxFriends.Size = new System.Drawing.Size(208, 36);
             this.listBoxFriends.TabIndex = 56;
             // 
             // buttonShowAllFriends
@@ -154,30 +154,30 @@
             // 
             this.listBoxPages.FormattingEnabled = true;
             this.listBoxPages.ItemHeight = 16;
-            this.listBoxPages.Location = new System.Drawing.Point(459, 324);
-            this.listBoxPages.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.listBoxPages.Location = new System.Drawing.Point(448, 324);
+            this.listBoxPages.Margin = new System.Windows.Forms.Padding(4);
             this.listBoxPages.Name = "listBoxPages";
-            this.listBoxPages.Size = new System.Drawing.Size(241, 36);
+            this.listBoxPages.Size = new System.Drawing.Size(229, 36);
             this.listBoxPages.TabIndex = 61;
             // 
             // listBoxGroups
             // 
             this.listBoxGroups.FormattingEnabled = true;
             this.listBoxGroups.ItemHeight = 16;
-            this.listBoxGroups.Location = new System.Drawing.Point(459, 402);
-            this.listBoxGroups.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.listBoxGroups.Location = new System.Drawing.Point(448, 407);
+            this.listBoxGroups.Margin = new System.Windows.Forms.Padding(4);
             this.listBoxGroups.Name = "listBoxGroups";
-            this.listBoxGroups.Size = new System.Drawing.Size(241, 36);
+            this.listBoxGroups.Size = new System.Drawing.Size(229, 36);
             this.listBoxGroups.TabIndex = 62;
             // 
             // listBoxEvents
             // 
             this.listBoxEvents.FormattingEnabled = true;
             this.listBoxEvents.ItemHeight = 16;
-            this.listBoxEvents.Location = new System.Drawing.Point(459, 481);
-            this.listBoxEvents.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.listBoxEvents.Location = new System.Drawing.Point(448, 499);
+            this.listBoxEvents.Margin = new System.Windows.Forms.Padding(4);
             this.listBoxEvents.Name = "listBoxEvents";
-            this.listBoxEvents.Size = new System.Drawing.Size(241, 36);
+            this.listBoxEvents.Size = new System.Drawing.Size(229, 36);
             this.listBoxEvents.TabIndex = 64;
             // 
             // listBoxAbout
@@ -185,7 +185,7 @@
             this.listBoxAbout.FormattingEnabled = true;
             this.listBoxAbout.ItemHeight = 16;
             this.listBoxAbout.Location = new System.Drawing.Point(831, 15);
-            this.listBoxAbout.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.listBoxAbout.Margin = new System.Windows.Forms.Padding(4);
             this.listBoxAbout.Name = "listBoxAbout";
             this.listBoxAbout.Size = new System.Drawing.Size(199, 100);
             this.listBoxAbout.TabIndex = 65;
@@ -211,7 +211,7 @@
             // labelMyPages
             // 
             this.labelMyPages.AutoSize = true;
-            this.labelMyPages.Location = new System.Drawing.Point(373, 324);
+            this.labelMyPages.Location = new System.Drawing.Point(362, 324);
             this.labelMyPages.Name = "labelMyPages";
             this.labelMyPages.Size = new System.Drawing.Size(74, 17);
             this.labelMyPages.TabIndex = 70;
@@ -221,7 +221,7 @@
             // 
             this.buttonShowAllPages.AutoSize = true;
             this.buttonShowAllPages.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.buttonShowAllPages.Location = new System.Drawing.Point(459, 364);
+            this.buttonShowAllPages.Location = new System.Drawing.Point(448, 364);
             this.buttonShowAllPages.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonShowAllPages.Name = "buttonShowAllPages";
             this.buttonShowAllPages.Size = new System.Drawing.Size(117, 27);
@@ -233,7 +233,7 @@
             // labelMyGroups
             // 
             this.labelMyGroups.AutoSize = true;
-            this.labelMyGroups.Location = new System.Drawing.Point(373, 402);
+            this.labelMyGroups.Location = new System.Drawing.Point(362, 407);
             this.labelMyGroups.Name = "labelMyGroups";
             this.labelMyGroups.Size = new System.Drawing.Size(81, 17);
             this.labelMyGroups.TabIndex = 72;
@@ -243,7 +243,7 @@
             // 
             this.buttonShowAllGroups.AutoSize = true;
             this.buttonShowAllGroups.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.buttonShowAllGroups.Location = new System.Drawing.Point(459, 444);
+            this.buttonShowAllGroups.Location = new System.Drawing.Point(448, 449);
             this.buttonShowAllGroups.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonShowAllGroups.Name = "buttonShowAllGroups";
             this.buttonShowAllGroups.Size = new System.Drawing.Size(122, 27);
@@ -255,7 +255,7 @@
             // labelMyEvents
             // 
             this.labelMyEvents.AutoSize = true;
-            this.labelMyEvents.Location = new System.Drawing.Point(373, 481);
+            this.labelMyEvents.Location = new System.Drawing.Point(362, 499);
             this.labelMyEvents.Name = "labelMyEvents";
             this.labelMyEvents.Size = new System.Drawing.Size(77, 17);
             this.labelMyEvents.TabIndex = 74;
@@ -265,7 +265,7 @@
             // 
             this.buttonShowAllEvents.AutoSize = true;
             this.buttonShowAllEvents.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.buttonShowAllEvents.Location = new System.Drawing.Point(459, 523);
+            this.buttonShowAllEvents.Location = new System.Drawing.Point(448, 541);
             this.buttonShowAllEvents.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonShowAllEvents.Name = "buttonShowAllEvents";
             this.buttonShowAllEvents.Size = new System.Drawing.Size(120, 27);
@@ -278,16 +278,16 @@
             // 
             this.listBoxAlbums.FormattingEnabled = true;
             this.listBoxAlbums.ItemHeight = 16;
-            this.listBoxAlbums.Location = new System.Drawing.Point(108, 402);
-            this.listBoxAlbums.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.listBoxAlbums.Location = new System.Drawing.Point(108, 407);
+            this.listBoxAlbums.Margin = new System.Windows.Forms.Padding(4);
             this.listBoxAlbums.Name = "listBoxAlbums";
-            this.listBoxAlbums.Size = new System.Drawing.Size(236, 36);
+            this.listBoxAlbums.Size = new System.Drawing.Size(208, 36);
             this.listBoxAlbums.TabIndex = 77;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 402);
+            this.label2.Location = new System.Drawing.Point(13, 407);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(80, 17);
             this.label2.TabIndex = 78;
@@ -297,7 +297,7 @@
             // 
             this.buttonShowAllAlbums.AutoSize = true;
             this.buttonShowAllAlbums.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.buttonShowAllAlbums.Location = new System.Drawing.Point(108, 446);
+            this.buttonShowAllAlbums.Location = new System.Drawing.Point(108, 451);
             this.buttonShowAllAlbums.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonShowAllAlbums.Name = "buttonShowAllAlbums";
             this.buttonShowAllAlbums.Size = new System.Drawing.Size(119, 27);
@@ -308,10 +308,10 @@
             // 
             // pictureBoxChange
             // 
-            this.pictureBoxChange.Location = new System.Drawing.Point(735, 324);
-            this.pictureBoxChange.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBoxChange.Location = new System.Drawing.Point(774, 324);
+            this.pictureBoxChange.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBoxChange.Name = "pictureBoxChange";
-            this.pictureBoxChange.Size = new System.Drawing.Size(352, 249);
+            this.pictureBoxChange.Size = new System.Drawing.Size(332, 249);
             this.pictureBoxChange.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxChange.TabIndex = 81;
             this.pictureBoxChange.TabStop = false;
@@ -326,7 +326,7 @@
             // 
             this.buttonFindFriends.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonFindFriends.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.buttonFindFriends.Location = new System.Drawing.Point(20, 502);
+            this.buttonFindFriends.Location = new System.Drawing.Point(16, 523);
             this.buttonFindFriends.Name = "buttonFindFriends";
             this.buttonFindFriends.Size = new System.Drawing.Size(324, 68);
             this.buttonFindFriends.TabIndex = 82;
@@ -361,7 +361,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(1123, 599);
+            this.ClientSize = new System.Drawing.Size(1126, 611);
             this.Controls.Add(this.buttonFindFriends);
             this.Controls.Add(this.pictureBoxChange);
             this.Controls.Add(this.buttonShowAllAlbums);
@@ -387,7 +387,7 @@
             this.Controls.Add(this.pictureBoxProfile);
             this.Controls.Add(this.pictureBoxCover);
             this.Controls.Add(this.buttonLogout);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";

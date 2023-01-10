@@ -37,13 +37,16 @@ namespace BasicFacebookFeatures
 
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.listBoxCollectionItemsNames = new System.Windows.Forms.ListBox();
             this.textBoxSearchByName = new System.Windows.Forms.TextBox();
             this.pictureBoxItemMainPhoto = new System.Windows.Forms.PictureBox();
             this.labelDescription = new System.Windows.Forms.Label();
             this.labelDescriptionValue = new System.Windows.Forms.Label();
             this.buttonShowPictures = new System.Windows.Forms.Button();
+            this.groupBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxItemMainPhoto)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // listBoxCollectionItemsNames
@@ -105,6 +108,10 @@ namespace BasicFacebookFeatures
             this.buttonShowPictures.UseVisualStyleBackColor = true;
             this.buttonShowPictures.Click += new System.EventHandler(this.buttonShowPictures_Click);
             // 
+            // groupBindingSource
+            // 
+            this.groupBindingSource.DataSource = typeof(FacebookWrapper.ObjectModel.Group);
+            // 
             // FormFacebookCollection
             // 
             this.AutoScroll = true;
@@ -117,6 +124,7 @@ namespace BasicFacebookFeatures
             this.Controls.Add(this.listBoxCollectionItemsNames);
             this.Name = "FormFacebookCollection";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxItemMainPhoto)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -127,5 +135,6 @@ namespace BasicFacebookFeatures
         private Label labelDescription;
         private Label labelDescriptionValue;
         private Button buttonShowPictures;
+        private BindingSource groupBindingSource;
     }
 }

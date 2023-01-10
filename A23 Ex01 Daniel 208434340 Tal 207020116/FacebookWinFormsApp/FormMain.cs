@@ -38,15 +38,14 @@ namespace BasicFacebookFeatures
         private void fetchUserInfo()
         {
             pictureBoxProfile.LoadAsync(m_LoggedInUser.PictureNormalURL);
+            fetchAbout();
             new Thread(() => fetchCoverPhoto()).Start();
             new Thread(() => fetchFriendsList()).Start();
             new Thread(() => fetchPosts()).Start();
-            fetchAbout();
             new Thread(() => fetchGroups()).Start();
             new Thread(() => fetchPages()).Start();
             new Thread(() => fetchEvents()).Start();
             new Thread(() => fetchAlbums()).Start();
-
         }
 
         private void fetchCoverPhoto()
@@ -117,11 +116,6 @@ namespace BasicFacebookFeatures
 
         private void fetchAlbums()
         {
-            if (m_LoggedInUser.Albums.Count == 0)
-            {
-                listBoxAlbums.Invoke(new Action(() => listBoxAlbums.Items.Add("You don't have albums")));
-            }
-
             foreach (Album album in m_LoggedInUser.Albums)
             {
                 if (album.Name != null)

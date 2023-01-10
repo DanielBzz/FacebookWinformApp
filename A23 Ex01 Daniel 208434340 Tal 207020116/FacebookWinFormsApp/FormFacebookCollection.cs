@@ -22,6 +22,7 @@ namespace BasicFacebookFeatures
             initialComponent();
             listBoxCollectionItemsNames.DataSource = m_InList;
             listBoxCollectionItemsNames.DisplayMember = "Name";
+            listBoxCollectionItemsNames.ValueMember = "Id";
         }
 
         public void DescriptionDataBinding(string i_DataSourceDescriptionProperty)

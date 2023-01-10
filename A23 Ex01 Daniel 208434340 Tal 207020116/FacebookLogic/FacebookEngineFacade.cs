@@ -10,7 +10,7 @@ namespace FacebookEngine
     public class FacebookEngineFacade
     {
         private FindTeamLogic m_FindTeamLogic;
-        private UserAboutAdapter r_AboutUserAdapter;
+        private IAbout r_AboutUserAdapter;
 
         public List<string> GetMyTeam(User i_userInSystem, IEnumerable<Page> chosenPages, IEnumerable<Group> chosenGroups, int minAge, int maxAge)
         {
@@ -49,7 +49,7 @@ namespace FacebookEngine
             new UserDetails(i_Token).SaveToFile();
         }
 
-        public string GetUserRemembered()
+        public string GetRememberedUser()
         {
             return UserDetails.LoadFromFile().m_UserToken;
         }

@@ -63,7 +63,7 @@ namespace BasicFacebookFeatures
 
         private void checkIfRememberLastUser()
         {
-            string token = r_FacebookEngineFacade.GetUserRemembered();
+            string token = r_FacebookEngineFacade.GetRememberedUser();
 
             if (token != null)
             {
