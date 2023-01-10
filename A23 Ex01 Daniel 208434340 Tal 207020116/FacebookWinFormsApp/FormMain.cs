@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Windows.Forms;
-using FacebookWrapper.ObjectModel;
-using FacebookWrapper;
-using FacebookEngine;
 using System.Threading;
+using System.Windows.Forms;
+using FacebookEngine;
+using FacebookWrapper;
+using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures
 {
@@ -11,20 +11,21 @@ namespace BasicFacebookFeatures
     {
         private static readonly string rs_LikesLabelString = "Likes: {0}";
         private readonly Random r_Random = new Random();
+        private readonly FacebookEngineFacade r_FacebookEngineFacade;
         private bool m_RememberUser;
         private LoginResult m_LoginResult;
         private User m_LoggedInUser;
         private FormFindTeam m_FormFindTeam = null;
-
         public bool LogoutPressed { get; set; }
 
-        public FormMain(LoginResult i_LoginResult, bool i_RememberUser)
+        public FormMain(LoginResult i_LoginResult, bool i_RememberUser, FacebookEngineFacade i_SystemEngineFacade)
         {
             InitializeComponent();
             FacebookWrapper.FacebookService.s_CollectionLimit = 100;
             m_LoginResult = i_LoginResult;
             m_LoggedInUser = m_LoginResult.LoggedInUser;
             m_RememberUser = i_RememberUser;
+            r_FacebookEngineFacade = i_SystemEngineFacade;
         }
 
         public void whenConnected()
@@ -40,11 +41,12 @@ namespace BasicFacebookFeatures
             new Thread(() => fetchCoverPhoto()).Start();
             new Thread(() => fetchFriendsList()).Start();
             new Thread(() => fetchPosts()).Start();
-            //fetchAbout();
+            fetchAbout();
             new Thread(() => fetchGroups()).Start();
             new Thread(() => fetchPages()).Start();
             new Thread(() => fetchEvents()).Start();
             new Thread(() => fetchAlbums()).Start();
+
         }
 
         private void fetchCoverPhoto()
@@ -131,25 +133,9 @@ namespace BasicFacebookFeatures
 
         private void fetchAbout()
         {
-            if (m_LoggedInUser.Name != null)
+            foreach (string info in r_FacebookEngineFacade.GetDetailsAboutUser(m_LoggedInUser))
             {
-                listBoxAbout.Items.Add("UserName: " + m_LoggedInUser.Name);
-            }
-            if (m_LoggedInUser.Email != null)
-            {
-                listBoxAbout.Items.Add("Email: " + m_LoggedInUser.Email);
-            }
-            if (m_LoggedInUser.Birthday != null)
-            {
-                listBoxAbout.Items.Add("Birthday: " + m_LoggedInUser.Birthday);
-            }
-            if (m_LoggedInUser.Hometown != null)
-            {
-                listBoxAbout.Items.Add("Hometown: " + m_LoggedInUser.Hometown);
-            }
-            if (m_LoggedInUser.Location != null)
-            {
-                listBoxAbout.Items.Add("Current location: " + m_LoggedInUser.Location);
+                listBoxAbout.Items.Add(info);
             }
         }
 
@@ -180,14 +166,13 @@ namespace BasicFacebookFeatures
         private void FormMain_FormClosed(object sender, FormClosedEventArgs e)
         {
             string token = m_RememberUser ? m_LoginResult.AccessToken : null;
-            new UserDetails(token).SaveToFile();
+            r_FacebookEngineFacade.rememberUserForNextTime(token);
         }
 
         private void listBoxPosts_SelectedIndexChanged(object sender, EventArgs e)
         {
             Post selected = m_LoggedInUser.Posts[listBoxPosts.SelectedIndex];
 
-            // labelCurrentPostLikes.Text = string.Format(r_LikesLabelString, selected.LikedBy.Count); LikedBy throw exception!
             labelCurrentPostLikes.Text = string.Format(rs_LikesLabelString, 1);
             listBoxPostComments.DisplayMember = "Message";
             listBoxPostComments.DataSource = selected.Comments;
@@ -195,27 +180,27 @@ namespace BasicFacebookFeatures
 
         private void buttonShowFriends_Click(object sender, EventArgs e)
         {
-            new FormFacebookCollection<User>(m_LoggedInUser.Friends).ShowDialog();
+            CollectionFormFactory.CreateForm(m_LoggedInUser, eCollectionFormType.FriendsForm).ShowDialog();
         }
 
         private void buttonShowAllPages_Click(object sender, EventArgs e)
         {
-            new FormFacebookCollection<Page>(m_LoggedInUser.LikedPages).ShowDialog();
+            CollectionFormFactory.CreateForm(m_LoggedInUser, eCollectionFormType.LikedPagesForm).ShowDialog();
         }
 
         private void buttonShowAllGroups_Click(object sender, EventArgs e)
         {
-            new FormFacebookCollection<Group>(m_LoggedInUser.Groups).ShowDialog();
+            CollectionFormFactory.CreateForm(m_LoggedInUser, eCollectionFormType.GroupsForm).ShowDialog();
         }
 
         private void buttonShowAllEvents_Click(object sender, EventArgs e)
         {
-            new FormFacebookCollection<Event>(m_LoggedInUser.Events).ShowDialog();
+            CollectionFormFactory.CreateForm(m_LoggedInUser, eCollectionFormType.EventsForm).ShowDialog();
         }
 
         private void buttonShowAllAlbums_Click(object sender, EventArgs e)
         {
-            new FormFacebookCollection<Album>(m_LoggedInUser.Albums).ShowDialog();
+            CollectionFormFactory.CreateForm(m_LoggedInUser, eCollectionFormType.AlbumsForm).ShowDialog();
         }
 
         private void changeRandomPictureInPictureBox()
@@ -250,7 +235,7 @@ namespace BasicFacebookFeatures
         {
             if (m_FormFindTeam == null)
             {
-                m_FormFindTeam = new FormFindTeam(m_LoggedInUser);
+                m_FormFindTeam = new FormFindTeam(m_LoggedInUser, r_FacebookEngineFacade);
             }
 
             m_FormFindTeam.ShowDialog();

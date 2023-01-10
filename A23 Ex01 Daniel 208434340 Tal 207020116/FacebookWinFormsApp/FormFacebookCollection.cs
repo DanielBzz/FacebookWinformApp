@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Reflection;
 using System.Windows.Forms;
+using FacebookEngine;
 using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures
@@ -9,85 +11,47 @@ namespace BasicFacebookFeatures
     public partial class FormFacebookCollection<T> : Form
     {
         private readonly FacebookObjectCollection<T> r_FullCollection;
-        private List<T> m_InList;
+        private BindingList<T> m_InList;
 
         public FormFacebookCollection(FacebookObjectCollection<T> i_Collection)
         {
             InitializeComponent();
             r_FullCollection = i_Collection;
-            m_InList = new List<T>(i_Collection.Count);
+            m_InList = new BindingList<T>();
             Text = $"{typeof(T).Name}s list";
             initialComponent();
+            listBoxCollectionItemsNames.DataSource = m_InList;
+            listBoxCollectionItemsNames.DisplayMember = "Name";
+        }
+
+        public void DescriptionDataBinding(string i_DataSourceDescriptionProperty)
+        {
+            labelDescriptionValue.DataBindings.Add(new Binding("Text", listBoxCollectionItemsNames.DataSource, i_DataSourceDescriptionProperty, true));
+        }
+
+        public void MainPhotoDataBinding(string i_DataSourceImageProperty)
+        {
+            pictureBoxItemMainPhoto.DataBindings.Add(new Binding("Image", listBoxCollectionItemsNames.DataSource, i_DataSourceImageProperty, true));
         }
 
         public void initialComponent()
         {
-            PropertyInfo nameProperty = typeof(T).GetProperty("Name");
-            string name = null;
-
             foreach (T item in r_FullCollection)
             {
-                name = nameProperty.GetValue(item) is string ?
-                    nameProperty.GetValue(item) as string : $"No name for {typeof(T).Name}";
-                listBoxCollectionItemsNames.Items.Add(name);
-                m_InList.Add(item);
-            }
-
-            if (r_FullCollection.Count == 0)
-            {
-                listBoxCollectionItemsNames.Items.Add($"No {typeof(T).Name}s to show");
-                textBoxSearchByName.Enabled = false;
+                   m_InList.Add(item);
             }
 
             buttonShowPictures.Visible = typeof(T) == typeof(Album);
-        }
-
-        private void listBoxCollectionItemsNames_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            initalMainPictureValue(listBoxCollectionItemsNames.SelectedIndex);
-            initialDescriptionValue(listBoxCollectionItemsNames.SelectedIndex);
-        }
-
-        private void initalMainPictureValue(int i_SelectedIndex)
-        {
-            PropertyInfo pictureProperty = typeof(T).GetProperty("PictureNormalURL");
-
-            if (pictureProperty != null)
-            {
-                pictureBoxItemMainPhoto.LoadAsync(
-                    pictureProperty.GetValue(m_InList[listBoxCollectionItemsNames.SelectedIndex]) as string);
-            }
-        }
-
-        private void initialDescriptionValue(int i_indexInList)
-        {
-            PropertyInfo descriptionProperty = typeof(T).GetProperty("Description");
-
-            if (descriptionProperty != null)
-            {
-                labelDescriptionValue.Text = descriptionProperty.GetValue(m_InList[i_indexInList]) as string;
-            }
-            else
-            {
-                labelDescription.Text = string.Empty;
-            }
-        }
-
-        private void listBoxCollectionItemsNames_Click(object sender, EventArgs e)
-        {
-            Album selectedAlbum = m_InList[listBoxCollectionItemsNames.SelectedIndex] as Album;
-
-            if (selectedAlbum != null)
-            {
-                pictureBoxItemMainPhoto.LoadAsync(selectedAlbum.PictureAlbumURL);
-            }
         }
 
         private void buttonShowPictures_Click(object sender, EventArgs e)
         {
             if(listBoxCollectionItemsNames.SelectedIndex != -1)
             {
-                new FormFacebookCollection<Photo>((m_InList[listBoxCollectionItemsNames.SelectedIndex] as Album).Photos).ShowDialog();
+                FormFacebookCollection <Photo> form =
+                    new FormFacebookCollection<Photo>((m_InList[listBoxCollectionItemsNames.SelectedIndex] as Album).Photos);
+                form.MainPhotoDataBinding("ImageNormal");
+                form.ShowDialog();
             }
         }
 
@@ -100,7 +64,6 @@ namespace BasicFacebookFeatures
                 PropertyInfo nameProperty = typeof(T).GetProperty("Name");
                 string currentName = null;
 
-                listBoxCollectionItemsNames.Items.Clear();
                 m_InList.Clear();
                 foreach (T item in r_FullCollection)
                 {
@@ -108,7 +71,6 @@ namespace BasicFacebookFeatures
                         nameProperty.GetValue(item) as string : $"No name for {typeof(T).Name}";
                     if (currentName != null && currentName.ToUpper().Contains(textBoxSearchByName.Text.ToUpper()))
                     {
-                        listBoxCollectionItemsNames.Items.Add(currentName);
                         m_InList.Add(item);
                     }
                 }
@@ -141,8 +103,7 @@ namespace BasicFacebookFeatures
 
             if (pictureProperty != null && listBoxCollectionItemsNames.SelectedIndex != -1)
             {
-                new FormPicture(
-                    pictureProperty.GetValue(m_InList[listBoxCollectionItemsNames.SelectedIndex]) as string).ShowDialog();
+                new FormPicture(pictureProperty.GetValue(listBoxCollectionItemsNames.SelectedItem) as string).ShowDialog();
             }
         }
     }

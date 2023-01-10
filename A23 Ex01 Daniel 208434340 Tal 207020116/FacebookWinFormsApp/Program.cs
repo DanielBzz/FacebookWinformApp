@@ -30,7 +30,7 @@ namespace BasicFacebookFeatures
 
                 if (loginForm.isUserConnected())
                 {
-                    Application.Run(loginForm.MainApp);
+                    loginForm.MainApp.ShowDialog();
                 }
             }
             while (loginForm.MainApp != null && loginForm.MainApp.LogoutPressed);

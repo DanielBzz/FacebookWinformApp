@@ -7,6 +7,7 @@ namespace BasicFacebookFeatures
 {
     public partial class FormLogin : Form
     {
+        private readonly FacebookEngineFacade r_FacebookEngineFacade = new FacebookEngineFacade();
         private FormMain m_MainApp;
 
         public FormMain MainApp
@@ -62,11 +63,11 @@ namespace BasicFacebookFeatures
 
         private void checkIfRememberLastUser()
         {
-            UserDetails lastUser = UserDetails.LoadFromFile();
+            string token = r_FacebookEngineFacade.GetUserRemembered();
 
-            if (lastUser.Remember)
+            if (token != null)
             {
-                LoginResult loginResult = FacebookService.Connect(lastUser.m_UserToken);
+                LoginResult loginResult = FacebookService.Connect(token);
                 checkBoxRememberMe.Checked = true;
                 initialMainApp(loginResult);
             }
@@ -74,7 +75,7 @@ namespace BasicFacebookFeatures
 
         private void initialMainApp(LoginResult i_LoginResult)
         {
-            m_MainApp = new FormMain(i_LoginResult, checkBoxRememberMe.Checked);
+            m_MainApp = new FormMain(i_LoginResult, checkBoxRememberMe.Checked, r_FacebookEngineFacade);
             m_MainApp.whenConnected();
             Close();
         }

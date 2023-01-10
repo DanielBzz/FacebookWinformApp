@@ -1,6 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using FacebookEngine;
 using FacebookWrapper.ObjectModel;
@@ -9,33 +14,33 @@ namespace BasicFacebookFeatures
 {
     public partial class FormFindTeam : Form
     {
+        private readonly FacebookEngineFacade r_FacebookEngineFacade;
         private User m_LoggedInUser;
-        private FindTeamLogic m_FindTeamLogic;
 
-        public FormFindTeam(User i_User)
+        public FormFindTeam(User i_User, FacebookEngineFacade i_EngineSystemOperations)
         {
             InitializeComponent();
             m_LoggedInUser = i_User;
-            for (int i = 18; i < 100; i++)
+            for (int i = 18; i < 85; i++)
             {
                 comboBoxMinAge.Items.Add(i);
                 comboBoxMaxAge.Items.Add(i);
             }
 
             initialLists();
-            m_FindTeamLogic = new FindTeamLogic(m_LoggedInUser);
+            r_FacebookEngineFacade = i_EngineSystemOperations;
         }
 
         private void initialLists()
         {
             foreach (Page page in m_LoggedInUser.LikedPages)
             {
-                checkedListBoxPages.Items.Add(page.Name);
+                checkedListBoxPages.Items.Add(page);
             }
 
             foreach (Group group in m_LoggedInUser.Groups)
             {
-                checkedListBoxGroups.Items.Add(group.Name);
+                checkedListBoxGroups.Items.Add(group);
             }
         }
 
@@ -46,7 +51,7 @@ namespace BasicFacebookFeatures
             {
                 MessageBox.Show("you should initial the age range boxes");
             }
-            else if((int)comboBoxMaxAge.SelectedItem < (int)comboBoxMinAge.SelectedItem)
+            else if ((int)comboBoxMaxAge.SelectedItem < (int)comboBoxMinAge.SelectedItem)
             {
                 MessageBox.Show("your minmum age choice is bigger than the maximum age choice");
             }
@@ -56,9 +61,10 @@ namespace BasicFacebookFeatures
             }
             else
             {
-                List<string> friendsNames = m_FindTeamLogic.FindFriendsInTeam(
-                    checkedListBoxPages.CheckedItems.OfType<string>(),
-                    checkedListBoxGroups.CheckedItems.OfType<string>(),
+                List<string> friendsNames = r_FacebookEngineFacade.GetMyTeam(
+                    m_LoggedInUser,
+                    checkedListBoxPages.CheckedItems.OfType<Page>(),
+                    checkedListBoxGroups.CheckedItems.OfType<Group>(),
                     (int)comboBoxMinAge.SelectedItem,
                     (int)comboBoxMaxAge.SelectedItem);
 

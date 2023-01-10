@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace FacebookEngine
 {
-    public class FindTeamLogic
+    internal class FindTeamLogic
     {
         private User m_LoggedInUser;
 

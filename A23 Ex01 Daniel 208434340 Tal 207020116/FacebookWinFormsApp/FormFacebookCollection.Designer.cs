@@ -49,13 +49,11 @@ namespace BasicFacebookFeatures
             // listBoxCollectionItemsNames
             // 
             this.listBoxCollectionItemsNames.FormattingEnabled = true;
-            this.listBoxCollectionItemsNames.ItemHeight = 20;
+            this.listBoxCollectionItemsNames.ItemHeight = 16;
             this.listBoxCollectionItemsNames.Location = new System.Drawing.Point(12, 55);
             this.listBoxCollectionItemsNames.Name = "listBoxCollectionItemsNames";
-            this.listBoxCollectionItemsNames.Size = new System.Drawing.Size(305, 304);
+            this.listBoxCollectionItemsNames.Size = new System.Drawing.Size(305, 292);
             this.listBoxCollectionItemsNames.TabIndex = 0;
-            this.listBoxCollectionItemsNames.Click += new System.EventHandler(this.listBoxCollectionItemsNames_Click);
-            this.listBoxCollectionItemsNames.SelectedIndexChanged += new System.EventHandler(this.listBoxCollectionItemsNames_SelectedIndexChanged);
             // 
             // textBoxSearchByName
             // 
@@ -63,7 +61,7 @@ namespace BasicFacebookFeatures
             this.textBoxSearchByName.AccessibleName = "";
             this.textBoxSearchByName.Location = new System.Drawing.Point(12, 12);
             this.textBoxSearchByName.Name = "textBoxSearchByName";
-            this.textBoxSearchByName.Size = new System.Drawing.Size(305, 26);
+            this.textBoxSearchByName.Size = new System.Drawing.Size(305, 22);
             this.textBoxSearchByName.TabIndex = 1;
             this.textBoxSearchByName.Text = "search";
             this.textBoxSearchByName.TextChanged += new System.EventHandler(this.textBoxSearchByName_TextChanged);
@@ -85,7 +83,7 @@ namespace BasicFacebookFeatures
             this.labelDescription.AutoSize = true;
             this.labelDescription.Location = new System.Drawing.Point(324, 221);
             this.labelDescription.Name = "labelDescription";
-            this.labelDescription.Size = new System.Drawing.Size(100, 20);
+            this.labelDescription.Size = new System.Drawing.Size(83, 17);
             this.labelDescription.TabIndex = 3;
             this.labelDescription.Text = "Description:";
             // 
@@ -94,7 +92,7 @@ namespace BasicFacebookFeatures
             this.labelDescriptionValue.AutoSize = true;
             this.labelDescriptionValue.Location = new System.Drawing.Point(328, 254);
             this.labelDescriptionValue.Name = "labelDescriptionValue";
-            this.labelDescriptionValue.Size = new System.Drawing.Size(0, 20);
+            this.labelDescriptionValue.Size = new System.Drawing.Size(0, 17);
             this.labelDescriptionValue.TabIndex = 4;
             // 
             // buttonShowPictures
@@ -110,7 +108,7 @@ namespace BasicFacebookFeatures
             // FormFacebookCollection
             // 
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(463, 389);
+            this.ClientSize = new System.Drawing.Size(598, 389);
             this.Controls.Add(this.buttonShowPictures);
             this.Controls.Add(this.labelDescriptionValue);
             this.Controls.Add(this.labelDescription);

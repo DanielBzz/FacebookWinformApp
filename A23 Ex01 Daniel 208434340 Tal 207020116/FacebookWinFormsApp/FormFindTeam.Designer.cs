@@ -41,13 +41,15 @@
             this.label3 = new System.Windows.Forms.Label();
             this.listBoxFriends = new System.Windows.Forms.ListBox();
             this.labelFriendsUpdate = new System.Windows.Forms.Label();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkBoxPopularity = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // labelMain
             // 
             this.labelMain.AutoSize = true;
             this.labelMain.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelMain.Location = new System.Drawing.Point(14, 30);
+            this.labelMain.Location = new System.Drawing.Point(12, 25);
             this.labelMain.Name = "labelMain";
             this.labelMain.Size = new System.Drawing.Size(280, 32);
             this.labelMain.TabIndex = 0;
@@ -57,7 +59,7 @@
             // 
             this.labelFeatureExplanation.AutoSize = true;
             this.labelFeatureExplanation.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelFeatureExplanation.Location = new System.Drawing.Point(16, 86);
+            this.labelFeatureExplanation.Location = new System.Drawing.Point(15, 69);
             this.labelFeatureExplanation.Name = "labelFeatureExplanation";
             this.labelFeatureExplanation.Size = new System.Drawing.Size(756, 40);
             this.labelFeatureExplanation.TabIndex = 1;
@@ -67,73 +69,73 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(17, 160);
+            this.label1.Location = new System.Drawing.Point(15, 128);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(209, 20);
+            this.label1.Size = new System.Drawing.Size(179, 17);
             this.label1.TabIndex = 2;
             this.label1.Text = "Choose pages and groups:";
             // 
             // checkedListBoxPages
             // 
             this.checkedListBoxPages.FormattingEnabled = true;
-            this.checkedListBoxPages.Location = new System.Drawing.Point(20, 198);
+            this.checkedListBoxPages.Location = new System.Drawing.Point(17, 159);
             this.checkedListBoxPages.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.checkedListBoxPages.Name = "checkedListBoxPages";
-            this.checkedListBoxPages.Size = new System.Drawing.Size(270, 193);
+            this.checkedListBoxPages.Size = new System.Drawing.Size(240, 140);
             this.checkedListBoxPages.TabIndex = 3;
             // 
             // checkedListBoxGroups
             // 
             this.checkedListBoxGroups.FormattingEnabled = true;
-            this.checkedListBoxGroups.Location = new System.Drawing.Point(297, 198);
+            this.checkedListBoxGroups.Location = new System.Drawing.Point(264, 159);
             this.checkedListBoxGroups.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.checkedListBoxGroups.Name = "checkedListBoxGroups";
-            this.checkedListBoxGroups.Size = new System.Drawing.Size(270, 193);
+            this.checkedListBoxGroups.Size = new System.Drawing.Size(240, 140);
             this.checkedListBoxGroups.TabIndex = 4;
             // 
             // labelAgeRange
             // 
             this.labelAgeRange.AutoSize = true;
-            this.labelAgeRange.Location = new System.Drawing.Point(17, 429);
+            this.labelAgeRange.Location = new System.Drawing.Point(15, 436);
             this.labelAgeRange.Name = "labelAgeRange";
-            this.labelAgeRange.Size = new System.Drawing.Size(90, 20);
+            this.labelAgeRange.Size = new System.Drawing.Size(78, 17);
             this.labelAgeRange.TabIndex = 5;
             this.labelAgeRange.Text = "Age range:";
             // 
             // comboBoxMinAge
             // 
             this.comboBoxMinAge.FormattingEnabled = true;
-            this.comboBoxMinAge.Location = new System.Drawing.Point(111, 429);
+            this.comboBoxMinAge.Location = new System.Drawing.Point(99, 436);
             this.comboBoxMinAge.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.comboBoxMinAge.Name = "comboBoxMinAge";
-            this.comboBoxMinAge.Size = new System.Drawing.Size(51, 28);
+            this.comboBoxMinAge.Size = new System.Drawing.Size(45, 24);
             this.comboBoxMinAge.TabIndex = 6;
             // 
             // comboBoxMaxAge
             // 
             this.comboBoxMaxAge.FormattingEnabled = true;
-            this.comboBoxMaxAge.Location = new System.Drawing.Point(191, 429);
+            this.comboBoxMaxAge.Location = new System.Drawing.Point(169, 436);
             this.comboBoxMaxAge.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.comboBoxMaxAge.Name = "comboBoxMaxAge";
-            this.comboBoxMaxAge.Size = new System.Drawing.Size(51, 28);
+            this.comboBoxMaxAge.Size = new System.Drawing.Size(45, 24);
             this.comboBoxMaxAge.TabIndex = 7;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(170, 432);
+            this.label2.Location = new System.Drawing.Point(151, 439);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(15, 20);
+            this.label2.Size = new System.Drawing.Size(13, 17);
             this.label2.TabIndex = 8;
             this.label2.Text = "-";
             // 
             // buttonFindFriends
             // 
             this.buttonFindFriends.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonFindFriends.Location = new System.Drawing.Point(660, 198);
+            this.buttonFindFriends.Location = new System.Drawing.Point(587, 159);
             this.buttonFindFriends.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.buttonFindFriends.Name = "buttonFindFriends";
-            this.buttonFindFriends.Size = new System.Drawing.Size(164, 42);
+            this.buttonFindFriends.Size = new System.Drawing.Size(145, 33);
             this.buttonFindFriends.TabIndex = 9;
             this.buttonFindFriends.Text = "Find Friends";
             this.buttonFindFriends.UseVisualStyleBackColor = true;
@@ -143,7 +145,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(658, 288);
+            this.label3.Location = new System.Drawing.Point(585, 279);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(116, 24);
             this.label3.TabIndex = 10;
@@ -152,29 +154,53 @@
             // listBoxFriends
             // 
             this.listBoxFriends.FormattingEnabled = true;
-            this.listBoxFriends.ItemHeight = 20;
-            this.listBoxFriends.Location = new System.Drawing.Point(662, 321);
+            this.listBoxFriends.ItemHeight = 16;
+            this.listBoxFriends.Location = new System.Drawing.Point(588, 306);
             this.listBoxFriends.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.listBoxFriends.Name = "listBoxFriends";
-            this.listBoxFriends.Size = new System.Drawing.Size(226, 204);
+            this.listBoxFriends.Size = new System.Drawing.Size(201, 164);
             this.listBoxFriends.TabIndex = 11;
             // 
             // labelFriendsUpdate
             // 
             this.labelFriendsUpdate.AutoSize = true;
-            this.labelFriendsUpdate.Location = new System.Drawing.Point(658, 253);
+            this.labelFriendsUpdate.Location = new System.Drawing.Point(585, 202);
             this.labelFriendsUpdate.Name = "labelFriendsUpdate";
-            this.labelFriendsUpdate.Size = new System.Drawing.Size(0, 20);
+            this.labelFriendsUpdate.Size = new System.Drawing.Size(0, 17);
             this.labelFriendsUpdate.TabIndex = 12;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(0, 0);
+            this.checkBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(98, 21);
+            this.checkBox1.TabIndex = 13;
+            this.checkBox1.Text = "checkBox1";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxPopularity
+            // 
+            this.checkBoxPopularity.AutoSize = true;
+            this.checkBoxPopularity.Location = new System.Drawing.Point(267, 137);
+            this.checkBoxPopularity.Margin = new System.Windows.Forms.Padding(4);
+            this.checkBoxPopularity.Name = "checkBoxPopularity";
+            this.checkBoxPopularity.Size = new System.Drawing.Size(146, 21);
+            this.checkBoxPopularity.TabIndex = 14;
+            this.checkBoxPopularity.Text = "Filter by popularity";
+            this.checkBoxPopularity.UseVisualStyleBackColor = true;
             // 
             // FormFindTeam
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(900, 562);
+            this.ClientSize = new System.Drawing.Size(800, 479);
+            this.Controls.Add(this.checkBoxPopularity);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.labelFriendsUpdate);
             this.Controls.Add(this.listBoxFriends);
             this.Controls.Add(this.label3);
@@ -211,5 +237,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ListBox listBoxFriends;
         private System.Windows.Forms.Label labelFriendsUpdate;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox checkBoxPopularity;
     }
 }
