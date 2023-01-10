@@ -6,34 +6,28 @@ using FacebookWrapper;
 
 namespace BasicFacebookFeatures
 {
-    static class Program
+    public static class Program
     {
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        public static void Main()
         {
             FacebookService.s_UseForamttedToStrings = true;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            FormLogin loginForm;
+            FormLogin loginForm = new FormLogin();
 
-            do
+            if (!loginForm.isUserConnected())
             {
-                loginForm = new FormLogin();
-
-                if (!loginForm.isUserConnected())
-                {
-                    Application.Run(loginForm);
-                }
-
-                if (loginForm.isUserConnected())
-                {
-                    loginForm.MainApp.ShowDialog();
-                }
+                Application.Run(loginForm);
             }
-            while (loginForm.MainApp != null && loginForm.MainApp.LogoutPressed);
+
+            if (loginForm.isUserConnected())
+            {
+                loginForm.MainApp.ShowDialog();
+            }
         }
     }
 }

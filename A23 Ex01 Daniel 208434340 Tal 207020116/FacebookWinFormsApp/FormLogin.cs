@@ -32,9 +32,7 @@ namespace BasicFacebookFeatures
         private void buttonLogin_Click(object sender, EventArgs e)
         {
             LoginResult loginResult = FacebookService.Login(
-                    /// (This is Desig Patter's App ID. replace it with your own)
                     "878533360263979",
-                    /// requested permissions:
                     "email",
                     "public_profile",
                     "user_age_range",
@@ -76,8 +74,8 @@ namespace BasicFacebookFeatures
         private void initialMainApp(LoginResult i_LoginResult)
         {
             m_MainApp = new FormMain(i_LoginResult, checkBoxRememberMe.Checked, r_FacebookEngineFacade);
-            m_MainApp.whenConnected();
             Close();
+            m_MainApp.whenConnected();
         }
     }
 }

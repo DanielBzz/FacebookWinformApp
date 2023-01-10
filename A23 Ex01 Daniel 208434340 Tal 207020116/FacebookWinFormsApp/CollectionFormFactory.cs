@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using FacebookWrapper.ObjectModel;
 
@@ -20,7 +16,6 @@ namespace BasicFacebookFeatures
                     form = new FormFacebookCollection<User>(i_LoggedInUser.Friends);
                     ((FormFacebookCollection<User>)form).DescriptionDataBinding("About");
                     ((FormFacebookCollection<User>)form).MainPhotoDataBinding("ImageNormal");
-
                     break;
                 case eCollectionFormType.GroupsForm:
                     form = new FormFacebookCollection<Group>(i_LoggedInUser.Groups);

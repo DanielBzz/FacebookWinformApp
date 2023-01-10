@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
 using System.Windows.Forms;
-using FacebookEngine;
 using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures
@@ -22,7 +20,8 @@ namespace BasicFacebookFeatures
             initialComponent();
             listBoxCollectionItemsNames.DataSource = m_InList;
             listBoxCollectionItemsNames.DisplayMember = "Name";
-            listBoxCollectionItemsNames.ValueMember = "Id";
+            listBoxCollectionItemsNames.Format += (sender, e) =>
+                e.Value = typeof(T).GetProperty("Name").GetValue(e.ListItem) ?? "No Name for " + typeof(T).Name;
         }
 
         public void DescriptionDataBinding(string i_DataSourceDescriptionProperty)
@@ -35,7 +34,7 @@ namespace BasicFacebookFeatures
             pictureBoxItemMainPhoto.DataBindings.Add(new Binding("Image", listBoxCollectionItemsNames.DataSource, i_DataSourceImageProperty, true));
         }
 
-        public void initialComponent()
+        private void initialComponent()
         {
             foreach (T item in r_FullCollection)
             {
@@ -51,6 +50,7 @@ namespace BasicFacebookFeatures
             {
                 FormFacebookCollection <Photo> form =
                     new FormFacebookCollection<Photo>((m_InList[listBoxCollectionItemsNames.SelectedIndex] as Album).Photos);
+
                 form.MainPhotoDataBinding("ImageNormal");
                 form.ShowDialog();
             }

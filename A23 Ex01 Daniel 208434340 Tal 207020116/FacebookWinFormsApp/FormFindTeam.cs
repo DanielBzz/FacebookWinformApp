@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using FacebookEngine;
 using FacebookWrapper.ObjectModel;
@@ -21,17 +16,16 @@ namespace BasicFacebookFeatures
         {
             InitializeComponent();
             m_LoggedInUser = i_User;
-            for (int i = 18; i < 85; i++)
+            bindListBoxesToDataSource();
+            r_FacebookEngineFacade = i_EngineSystemOperations;
+            for (int i = 18; i < 100; i++)
             {
                 comboBoxMinAge.Items.Add(i);
                 comboBoxMaxAge.Items.Add(i);
             }
-
-            initialLists();
-            r_FacebookEngineFacade = i_EngineSystemOperations;
         }
 
-        private void initialLists()
+        private void bindListBoxesToDataSource()
         {
             pageBindingSource.DataSource = m_LoggedInUser.LikedPages;
             (checkedListBoxPages as ListBox).DataSource = pageBindingSource;

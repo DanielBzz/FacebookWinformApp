@@ -16,12 +16,13 @@ namespace BasicFacebookFeatures
         private LoginResult m_LoginResult;
         private User m_LoggedInUser;
         private FormFindTeam m_FormFindTeam = null;
+
         public bool LogoutPressed { get; set; }
 
         public FormMain(LoginResult i_LoginResult, bool i_RememberUser, FacebookEngineFacade i_SystemEngineFacade)
         {
             InitializeComponent();
-            FacebookWrapper.FacebookService.s_CollectionLimit = 100;
+            FacebookService.s_CollectionLimit = 100;
             m_LoginResult = i_LoginResult;
             m_LoggedInUser = m_LoginResult.LoggedInUser;
             m_RememberUser = i_RememberUser;
@@ -39,13 +40,16 @@ namespace BasicFacebookFeatures
         {
             pictureBoxProfile.LoadAsync(m_LoggedInUser.PictureNormalURL);
             fetchAbout();
-            new Thread(() => fetchCoverPhoto()).Start();
+            new Thread(() =>
+            {
+                fetchCoverPhoto();
+                fetchAlbums();
+            }).Start();
             new Thread(() => fetchFriendsList()).Start();
             new Thread(() => fetchPosts()).Start();
             new Thread(() => fetchGroups()).Start();
             new Thread(() => fetchPages()).Start();
             new Thread(() => fetchEvents()).Start();
-            new Thread(() => fetchAlbums()).Start();
         }
 
         private void fetchCoverPhoto()
@@ -69,7 +73,7 @@ namespace BasicFacebookFeatures
             {
                 if (post.Message != null)
                 {
-                    listBoxAbout.Invoke(new Action(() => listBoxPosts.Items.Add(post.CreatedTime + ": " + post.Message)));
+                    listBoxPosts.Invoke(new Action(() => listBoxPosts.Items.Add(post.CreatedTime + ": " + post.Message)));
                 }
             }
         }
@@ -129,7 +133,7 @@ namespace BasicFacebookFeatures
         {
             foreach (string info in r_FacebookEngineFacade.GetDetailsAboutUser(m_LoggedInUser))
             {
-                listBoxAbout.Items.Add(info);
+                    listBoxAbout.Items.Add(info);
             }
         }
 
@@ -154,12 +158,14 @@ namespace BasicFacebookFeatures
 			FacebookService.LogoutWithUI();
 			m_RememberUser = false;
 			LogoutPressed = true;
+			timer1.Stop();
 			Close();
         }
 
         private void FormMain_FormClosed(object sender, FormClosedEventArgs e)
         {
             string token = m_RememberUser ? m_LoginResult.AccessToken : null;
+
             r_FacebookEngineFacade.rememberUserForNextTime(token);
         }
 

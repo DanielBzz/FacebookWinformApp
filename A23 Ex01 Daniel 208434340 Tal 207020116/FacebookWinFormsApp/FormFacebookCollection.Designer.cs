@@ -115,7 +115,7 @@ namespace BasicFacebookFeatures
             // FormFacebookCollection
             // 
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(598, 389);
+            this.ClientSize = new System.Drawing.Size(513, 397);
             this.Controls.Add(this.buttonShowPictures);
             this.Controls.Add(this.labelDescriptionValue);
             this.Controls.Add(this.labelDescription);

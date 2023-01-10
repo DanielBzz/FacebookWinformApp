@@ -27,7 +27,8 @@ namespace FacebookEngine
                     foreach (Page friendPage in friend.LikedPages)
                     {
                         samePagesAndGroupsCounter = pageName.Equals(friendPage.Name) ?
-                            samePagesAndGroupsCounter + 1 : samePagesAndGroupsCounter;
+                            samePagesAndGroupsCounter + 1 : 
+                            samePagesAndGroupsCounter;
                     }
                 }
 
@@ -36,7 +37,8 @@ namespace FacebookEngine
                     foreach (Group friendGroup in friend.Groups)
                     {
                         samePagesAndGroupsCounter = groupName.Equals(friendGroup.Name) ?
-                            samePagesAndGroupsCounter + 1 : samePagesAndGroupsCounter;
+                            samePagesAndGroupsCounter + 1 :
+                            samePagesAndGroupsCounter;
                     }
                 }
 
@@ -61,7 +63,8 @@ namespace FacebookEngine
                 int age = time.Year - userBirthday.Year;
 
                 age = time.Month < userBirthday.Month ||
-                    (time.Month == userBirthday.Month && time.Day < userBirthday.Day) ? age - 1 : age;
+                    (time.Month == userBirthday.Month && time.Day < userBirthday.Day) ?
+                    age - 1 : age;
                 inRange = age <= i_MaxAge && age >= i_MinAge;
             }
             catch (Exception)
