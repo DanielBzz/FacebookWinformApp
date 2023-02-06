@@ -80,12 +80,15 @@ namespace BasicFacebookFeatures
 
         private void fetchFriendsList()
         {
+            User friend = null;
             int numOfFriendsToShow = m_LoggedInUser.Friends.Count > 1 ?
                 2 : m_LoggedInUser.Friends.Count;
 
             for (int i = 0; i < numOfFriendsToShow; i++)
             {
-                listBoxFriends.Invoke(new Action(() => listBoxFriends.Items.Add(m_LoggedInUser.Friends[0].UserName)));
+                friend = m_LoggedInUser.Friends[i];
+
+                listBoxFriends.Invoke(new Action(() => listBoxFriends.Items.Add(friend.FirstName + " " + friend.LastName)));
             }
         }
 

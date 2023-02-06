@@ -8,10 +8,10 @@ namespace BasicFacebookFeatures
 {
     public partial class FormFacebookCollection<T> : Form
     {
-        private readonly FacebookObjectCollection<T> r_FullCollection;
+        private readonly GenericFacebookObjectCollection<T> r_FullCollection;
         private BindingList<T> m_InList;
 
-        public FormFacebookCollection(FacebookObjectCollection<T> i_Collection)
+        public FormFacebookCollection(GenericFacebookObjectCollection<T> i_Collection)
         {
             InitializeComponent();
             r_FullCollection = i_Collection;
@@ -49,7 +49,8 @@ namespace BasicFacebookFeatures
             if(listBoxCollectionItemsNames.SelectedIndex != -1)
             {
                 FormFacebookCollection <Photo> form =
-                    new FormFacebookCollection<Photo>((m_InList[listBoxCollectionItemsNames.SelectedIndex] as Album).Photos);
+                    new FormFacebookCollection<Photo>(
+                        new GenericFacebookObjectCollection<Photo>((m_InList[listBoxCollectionItemsNames.SelectedIndex] as Album).Photos));
 
                 form.MainPhotoDataBinding("ImageNormal");
                 form.ShowDialog();
@@ -62,18 +63,11 @@ namespace BasicFacebookFeatures
 
             if (textBoxSearch != null && textBoxSearch.Focused)
             {
-                PropertyInfo nameProperty = typeof(T).GetProperty("Name");
-                string currentName = null;
-
+                r_FullCollection.Strategy = new FilterByString<T>(textBoxSearch.Text);
                 m_InList.Clear();
                 foreach (T item in r_FullCollection)
                 {
-                    currentName = nameProperty.GetValue(item) is string ?
-                        nameProperty.GetValue(item) as string : $"No name for {typeof(T).Name}";
-                    if (currentName != null && currentName.ToUpper().Contains(textBoxSearchByName.Text.ToUpper()))
-                    {
                         m_InList.Add(item);
-                    }
                 }
             }
         }

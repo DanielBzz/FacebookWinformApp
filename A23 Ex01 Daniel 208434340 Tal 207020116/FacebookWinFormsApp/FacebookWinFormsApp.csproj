@@ -108,6 +108,7 @@
   <ItemGroup>
     <Compile Include="CollectionFormFactory.cs" />
     <Compile Include="eCollectionFormsTypes.cs" />
+    <Compile Include="FilterByString.cs" />
     <Compile Include="FormFacebookCollection.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -134,8 +135,10 @@
     <Compile Include="FormPicture.Designer.cs">
       <DependentUpon>FormPicture.cs</DependentUpon>
     </Compile>
+    <Compile Include="IFilter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="GenericFacebookObjectCollection.cs" />
     <EmbeddedResource Include="FormFacebookCollection.resx">
       <DependentUpon>FormFacebookCollection.cs</DependentUpon>
     </EmbeddedResource>
